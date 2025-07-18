@@ -1,0 +1,120 @@
+/* --- src/components/ConfirmationModal/ConfirmationModal.css --- */
+
+/* Contenedor principal del modal (fondo oscuro translúcido) */
+.modal-overlay {
+    position: fixed; /* Fija el modal en la ventana */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente oscuro */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    opacity: 0; /* Inicialmente invisible */
+    visibility: hidden; /* Inicialmente oculto para no ocupar espacio */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Estado activo del modal */
+.modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Contenedor del contenido del modal */
+.modal-content {
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: 450px; /* Ancho máximo para el modal */
+    width: 90%; /* Ancho responsivo */
+    transform: translateY(-20px); /* Efecto de entrada */
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Estado activo del contenido del modal */
+.modal-overlay.open .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-content h3 {
+    color: #001F3F; /* Azul marino para el título */
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    color: #555;
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* Contenedor de botones del modal */
+.modal-buttons {
+    display: flex;
+    justify-content: center; /* Centra los botones */
+    gap: 15px; /* Espacio entre botones */
+}
+
+.modal-button {
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    min-width: 100px; /* Ancho mínimo para los botones */
+}
+
+.modal-button.confirm {
+    background-color: #dc3545; /* Rojo para confirmar acción peligrosa */
+    color: white;
+}
+
+.modal-button.confirm:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+.modal-button.cancel {
+    background-color: #6c757d; /* Gris para cancelar */
+    color: white;
+}
+
+.modal-button.cancel:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Media Queries para Responsividad del Modal */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 25px;
+        max-width: 95%;
+    }
+    .modal-content h3 {
+        font-size: 1.5em;
+    }
+    .modal-content p {
+        font-size: 0.9em;
+        margin-bottom: 25px;
+    }
+    .modal-buttons {
+        flex-direction: column; /* Apila los botones en pantallas pequeñas */
+        gap: 10px;
+    }
+    .modal-button {
+        width: 100%; /* Ocupa todo el ancho */
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}

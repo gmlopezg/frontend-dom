@@ -1,0 +1,249 @@
+/* --- src/pages/DenunciaStatusPage/DenunciaStatusPage.css --- */
+
+/* Reutilizamos algunos estilos base de formulario, pero con ajustes para la búsqueda */
+.main-content.form-page {
+    background-color: #001F3F; /* Fondo azul marino */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea el contenido arriba */
+    padding: 30px 20px;
+    overflow-y: auto;
+}
+
+.form-container.search-container {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px; /* Un poco más estrecho para la consulta */
+    margin: 20px auto;
+    text-align: center; /* Centra el contenido dentro del contenedor */
+}
+
+.search-container h2 {
+    color: #001F3F;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.search-description {
+    color: #666;
+    font-size: 1em;
+    margin-bottom: 30px;
+}
+
+/* Estilos para los grupos de formulario (labels e inputs) */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Alinea las etiquetas a la izquierda dentro del contenedor centrado */
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.form-group input[type="text"] {
+    width: calc(100% - 20px); /* Ajusta el ancho para incluir padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Estilos para el botón de envío */
+.submit-button {
+    background-color: #007BFF; /* Azul para el botón de consulta */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Estilos para mensajes de éxito/error */
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Estilos para los resultados de la búsqueda */
+.search-results {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: left; /* Alinea el texto de los resultados a la izquierda */
+}
+
+.result-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.result-card h3 {
+    color: #001F3F;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    text-align: center; /* Centra el título de la tarjeta de resultados */
+}
+
+.result-card p {
+    margin-bottom: 8px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.result-card strong {
+    color: #001F3F;
+}
+
+/* Estilos para el badge de estado */
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    margin-left: 10px;
+}
+
+.status-badge.status-ingresada {
+    background-color: #6c757d; /* Gris */
+}
+
+.status-badge.status-en-revision {
+    background-color: #ffc107; /* Amarillo/Naranja */
+    color: #343a40; /* Texto oscuro para contraste */
+}
+
+.status-badge.status-en-proceso {
+    background-color: #17a2b8; /* Azul claro */
+}
+
+.status-badge.status-resuelta {
+    background-color: #28a745; /* Verde */
+}
+
+.status-badge.status-cerrada {
+    background-color: #dc3545; /* Rojo */
+}
+
+/* Media Queries para Responsividad de DenunciaStatusPage */
+@media (max-width: 768px) {
+    .main-content.form-page {
+        padding: 20px 15px;
+    }
+    .form-container.search-container {
+        padding: 30px;
+        margin: 10px auto;
+    }
+    .search-container h2 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+    .search-description {
+        font-size: 0.95em;
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        font-size: 0.95em;
+    }
+    .form-group input[type="text"] {
+        padding: 8px;
+        font-size: 0.95em;
+    }
+    .submit-button {
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
+    .result-card {
+        padding: 15px;
+    }
+    .result-card h3 {
+        font-size: 1.3em;
+    }
+    .result-card p {
+        font-size: 0.9em;
+    }
+    .status-badge {
+        font-size: 0.8em;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content.form-page {
+        padding: 15px 10px;
+    }
+    .form-container.search-container {
+        padding: 20px;
+    }
+    .search-container h2 {
+        font-size: 1.5em;
+    }
+    .search-description {
+        font-size: 0.9em;
+    }
+    .form-group input[type="text"] {
+        font-size: 0.9em;
+    }
+    .submit-button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+    .result-card h3 {
+        font-size: 1.1em;
+    }
+    .result-card p {
+        font-size: 0.85em;
+    }
+    .status-badge {
+        font-size: 0.75em;
+    }
+}

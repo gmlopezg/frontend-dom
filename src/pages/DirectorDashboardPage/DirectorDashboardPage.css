@@ -1,0 +1,208 @@
+/* --- src/pages/DirectorDashboardPage/DirectorDashboardPage.css --- */
+
+/* Estilos Específicos para la Página del Dashboard (Director) */
+
+.main-content.dashboard-page {
+    background-color: #001F3F; /* Fondo azul marino */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea el contenido arriba */
+    padding: 30px;
+    overflow-y: auto; /* Permite scroll si el contenido es largo */
+}
+
+.dashboard-grid-container {
+    display: flex;
+    flex-direction: column; /* Apila las secciones verticalmente */
+    gap: 30px; /* Espacio entre secciones */
+    width: 100%;
+    max-width: 1000px; /* Ancho máximo del dashboard */
+    margin: 0 auto; /* Centra el contenedor principal */
+}
+
+.dashboard-section {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dashboard-section h2 {
+    color: #001F3F;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* Estilos para las Métricas Clave */
+.metrics-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan */
+    gap: 15px; /* Espacio entre las tarjetas de métricas */
+    justify-content: center;
+}
+
+.metric-card {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 15px 20px;
+    text-align: center;
+    min-width: 130px;
+    flex-grow: 1; /* Permite que las tarjetas crezcan para llenar el espacio */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-icon {
+    font-size: 2.2em;
+    color: #007BFF; /* Color azul para los íconos */
+    margin-bottom: 10px;
+}
+
+.metric-card h3 {
+    font-size: 0.9em;
+    color: #555;
+    margin: 0;
+}
+
+.metric-value {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #001F3F;
+    margin-top: 5px;
+}
+
+/* Estilo para la sección combinada de Métricas y Reportes */
+.metrics-reports-section {
+    width: 100%;
+}
+
+.subsection-title {
+    color: #001F3F;
+    font-size: 1.3em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.action-buttons.single-button {
+    margin-top: 0; /* Ajusta el margen si es un solo botón */
+}
+
+/* Contenedor para los dos cuadros de gestión inferiores */
+.bottom-management-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    gap: 30px; /* Espacio entre las columnas */
+    width: 100%;
+}
+
+/* Estilos para los Botones de Acción dentro de las secciones */
+.action-buttons {
+    display: flex;
+    flex-direction: column; /* Apila los botones verticalmente */
+    gap: 12px; /* Espacio entre botones */
+    margin-top: 20px;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center; /* Centra los botones */
+}
+
+.dashboard-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left; /* Alinea el texto a la izquierda para el ícono */
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 250px; /* Ancho máximo para los botones */
+}
+
+.dashboard-button i {
+    margin-right: 10px; /* Espacio entre el ícono y el texto */
+    font-size: 1.2em;
+}
+
+.dashboard-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+
+/* Media Queries para Responsividad del Dashboard */
+
+@media (max-width: 1024px) {
+    .dashboard-grid-container {
+        max-width: 900px;
+    }
+    .bottom-management-grid {
+        grid-template-columns: 1fr; /* Una sola columna en pantallas medianas */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content.dashboard-page {
+        padding: 20px;
+    }
+    .dashboard-grid-container {
+        gap: 20px;
+    }
+    .dashboard-section h2 {
+        font-size: 1.4em;
+    }
+    .metrics-container {
+        flex-direction: column; /* Apila las métricas en columna */
+        gap: 10px;
+    }
+    .metric-card {
+        min-width: unset;
+    }
+    .dashboard-button {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+    .metric-icon {
+        font-size: 1.8em;
+    }
+    .metric-value {
+        font-size: 1.5em;
+    }
+    .subsection-title {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-section {
+        padding: 20px;
+    }
+    .dashboard-section h2 {
+        font-size: 1.2em;
+    }
+    .metric-icon {
+        font-size: 1.6em;
+    }
+    .metric-value {
+        font-size: 1.3em;
+    }
+}

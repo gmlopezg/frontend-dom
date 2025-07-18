@@ -1,0 +1,185 @@
+/* --- src/pages/PublicFormPage/PublicFormPage.css --- */
+
+/* Estilos Específicos para la Página de Formulario */
+
+.main-content.form-page {
+    background-color: #001F3F; /* Asegura el fondo azul marino */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea el contenido arriba, para que el scroll funcione bien */
+    padding: 30px 20px;
+    overflow-y: auto; /* Permite el scroll vertical si el formulario es largo */
+}
+
+.form-container {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    padding: 40px;
+    width: 100%;
+    max-width: 700px; /* Ancho máximo para el formulario */
+    margin: 20px auto; /* Centra el contenedor y da un poco de margen */
+}
+
+.form-container h2 {
+    color: #001F3F;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group textarea,
+.form-group select {
+    width: calc(100% - 20px); /* Ajusta el ancho para incluir padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+.form-group textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 100px;
+}
+
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 8px 0;
+}
+
+.form-group small {
+    display: block;
+    color: #777;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+.form-container h3 {
+    color: #001F3F;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.optional-text {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.submit-button {
+    background-color: #28a745; /* Botón verde para enviar */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    display: block; /* Ocupa todo el ancho */
+    width: 100%;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Estilos para mensajes de éxito/error */
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Media Queries para Responsividad del Formulario */
+@media (max-width: 768px) {
+    .main-content.form-page {
+        padding: 20px 15px;
+    }
+    .form-container {
+        padding: 30px;
+        margin: 10px auto;
+    }
+    .form-container h2 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        font-size: 0.95em;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group textarea,
+    .form-group select {
+        padding: 8px;
+        font-size: 0.95em;
+    }
+    .submit-button {
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content.form-page {
+        padding: 15px 10px;
+    }
+    .form-container {
+        padding: 20px;
+    }
+    .form-container h2 {
+        font-size: 1.5em;
+    }
+    .form-group label {
+        font-size: 0.9em;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group textarea,
+    .form-group select {
+        font-size: 0.9em;
+    }
+    .submit-button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}

@@ -1,0 +1,164 @@
+/* Importa la fuente Montserrat de Google Fonts */
+/* Esto se maneja mejor en el main.jsx o index.html de Vite si estás usando Google Fonts de esa manera,
+   pero si no, puedes mantenerlo aquí. Asegúrate de que la URL de la fuente sea accesible. */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap'); */
+
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Importante para el modelo de caja */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el body ocupe al menos el alto de la vista */
+    height: 100%; /* Asegura que el body use el 100% del alto de su padre (html) */
+}
+
+/* 1. Franja Superior (Delgada - Azul Marino) */
+.top-nav {
+    background-color: #001F3F; /* Azul Marino */
+    height: 40px; /* Delgada */
+    display: flex;
+    justify-content: flex-end; /* Alinea "Iniciar Sesión" a la derecha */
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra sutil */
+}
+
+.login-link a {
+    color: #FFFFFF; /* Blanco */
+    text-decoration: none;
+    font-weight: 700; /* Negrita */
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+    color: #ADD8E6; /* Azul claro al pasar el mouse */
+}
+
+/* 2. Franja Intermedia (Gruesa - Blanca) */
+.header-branding {
+    background-color: #FFFFFF; /* Blanco */
+    height: 100px; /* Más gruesa */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
+    border-bottom: 1px solid #eee; /* Línea divisoria suave */
+}
+
+.branding-content {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 80px; /* Tamaño del logo */
+    width: auto;
+}
+
+.text-branding {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dom-text {
+    font-size: 4em;
+    font-weight: 600;
+    color: #001F3F;
+    line-height: 1;
+    margin-bottom: 2px;
+    text-align: right;
+}
+
+.sub-text {
+    font-size: 1.07em;
+    color: #555;
+    line-height: 1;
+    text-align: right;
+}
+
+/* 3. Área Principal de Contenido (Azul Marino) */
+.main-app-content {
+    background-color: #001F3F; /* Azul Marino */
+    flex-grow: 1; /* Hace que este div ocupe el resto del espacio disponible */
+    display: flex; /* Para centrar el contenido de la página dentro de él */
+    flex-direction: column; 
+    justify-content: flex-start; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    padding: 40px 20px; /* Espacio alrededor del contenido de la página */
+    overflow: auto; /* Permite scroll si el contenido es demasiado largo */
+}
+
+/*    .main-content {
+/*        background-color: #001F3F; /* Azul Marino */
+/*        flex-grow: 1; /* Hace que ocupe el resto del espacio disponible */
+/*        display: flex;
+/*        justify-content: center; /* Centra horizontalmente */
+/*        align-items: center; /* Centra verticalmente */
+/*        padding: 40px 20px; /* Espacio alrededor del contenido principal */
+/*        overflow: auto; /* Permite scroll si el contenido es demasiado largo */
+/*    }
+/*
+
+/* Media Queries para Responsividad Global */
+@media (max-width: 768px) {
+    .header-branding {
+        height: 80px;
+        padding: 0 15px;
+    }
+    .logo {
+        height: 60px;
+        margin-right: 0;
+    }
+    .dom-text {
+        font-size: 2.2em;
+    }
+    .sub-text {
+        font-size: 0.8em;
+    }
+    /* Añadir aquí cualquier otro ajuste global para 768px */
+}
+
+@media (max-width: 480px) {
+    .top-nav {
+        height: 35px;
+        padding: 0 10px;
+    }
+    .login-link a {
+        font-size: 0.8em;
+    }
+    .header-branding {
+        height: 70px;
+        padding: 0 10px;
+    }
+    .logo {
+        height: 50px;
+    }
+    .dom-text {
+        font-size: 1.8em;
+    }
+    .sub-text {
+        font-size: 0.7em;
+    }
+    .main-content {
+        padding: 30px 15px;
+    }
+    /* Añadir aquí cualquier otro ajuste global para 480px */
+}
+
+/* ------------------------------------------------------------- */
+/* NOTA IMPORTANTE: Los estilos específicos de formulario, tarjetas y dashboard
+   DEBEN ir en sus respectivos archivos CSS de componentes/páginas (ej. PublicFormPage.css)
+   para mantener la modularidad y evitar un archivo CSS global gigante.
+   No copies de aquí hacia abajo si estás siguiendo esa estrategia.
+*/

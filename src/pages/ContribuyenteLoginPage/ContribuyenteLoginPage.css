@@ -1,0 +1,162 @@
+/* --- src/pages/ContribuyenteLoginPage/ContribuyenteLoginPage.css --- */
+
+/* Reutilizamos las clases generales para el diseño de página de formulario/login */
+.main-content.form-page {
+    background-color: #001F3F; /* Fondo azul marino */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea el contenido arriba */
+    padding: 30px 20px;
+    overflow-y: auto;
+}
+
+.form-container.login-container { /* Combina form-container con login-container */
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px; /* Ancho más pequeño para un formulario de login */
+    margin: 20px auto;
+    text-align: center; /* Centra el texto dentro del contenedor */
+}
+
+.form-container.login-container h2 {
+    color: #001F3F;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.search-description {
+    color: #666;
+    font-size: 1em;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Alinea las etiquetas a la izquierda */
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: calc(100% - 20px); /* Ajusta el ancho para incluir padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+.submit-button {
+    background-color: #007BFF; /* Azul para el botón de login */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Estilos para mensajes de éxito/error */
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Enlace a registro */
+.register-link {
+    margin-top: 20px;
+    font-size: 0.95em;
+}
+.register-link a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 600;
+}
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .form-container.login-container {
+        padding: 30px;
+        margin: 10px auto;
+    }
+    .form-container.login-container h2 {
+        font-size: 1.8em;
+    }
+    .form-group label {
+        font-size: 0.95em;
+    }
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        padding: 8px;
+        font-size: 0.95em;
+    }
+    .submit-button {
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container.login-container {
+        padding: 20px;
+    }
+    .form-container.login-container h2 {
+        font-size: 1.5em;
+    }
+    .search-description {
+        font-size: 0.9em;
+    }
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        font-size: 0.9em;
+    }
+    .submit-button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}

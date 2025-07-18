@@ -1,0 +1,116 @@
+/* --- src/pages/HomePage/HomePage.css --- */
+
+/* Área Principal de Contenido (Azul Marino) */
+.main-content {
+    background-color: #001F3F; /* Azul Marino */
+    flex-grow: 1; /* Hace que ocupe el resto del espacio disponible */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    padding: 40px 20px; /* Espacio alrededor del contenido principal */
+    overflow: auto; /* Permite scroll si el contenido es demasiado largo */
+}
+
+.card-container {
+    display: flex;
+    gap: 30px; /* Espacio entre las tarjetas */
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en pantallas pequeñas */
+    justify-content: center; /* Centra las tarjetas si se envuelven */
+    max-width: 900px; /* Ancho máximo del contenedor de tarjetas */
+    width: 100%;
+}
+
+.action-card {
+    background-color: #FFFFFF; /* Fondo blanco para las tarjetas */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra más pronunciada para resaltar */
+    padding: 30px;
+    text-align: center;
+    width: 350px; /* Ancho fijo para cada tarjeta */
+    max-width: 100%; /* Asegura que no se desborde en móviles */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-8px); /* Efecto de "levantar" al pasar el mouse */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.action-card h2 {
+    color: #001F3F; /* Azul Marino para títulos */
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.action-card p {
+    color: #555;
+    font-size: 1em;
+    line-height: 1.5;
+    flex-grow: 1; /* Permite que la descripción ocupe el espacio disponible */
+    margin-bottom: 25px;
+}
+
+.action-card .button-link { /* Específico para los enlaces con estilo de botón */
+    background-color: #007BFF; /* Azul brillante para los botones */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* Para Link de React Router */
+    display: inline-block; /* Para que Link se comporte como botón */
+    width: auto; /* Ajusta el ancho al contenido */
+    min-width: 150px; /* Ancho mínimo para que no se vea muy pequeño */
+}
+
+.action-card .button-link:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+    transform: translateY(-2px);
+}
+
+/* Media Queries para Responsividad de HomePage */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 30px 15px;
+    }
+    .card-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .action-card {
+        width: 100%; /* Ocupa todo el ancho disponible en pantallas pequeñas */
+        padding: 25px;
+    }
+    .action-card h2 {
+        font-size: 1.6em;
+    }
+    .action-card p {
+        font-size: 0.95em;
+    }
+    .action-card .button-link {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 20px 10px;
+    }
+    .action-card {
+        padding: 20px;
+    }
+    .action-card h2 {
+        font-size: 1.4em;
+    }
+    .action-card p {
+        font-size: 0.9em;
+    }
+}

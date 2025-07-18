@@ -1,0 +1,162 @@
+/* --- src/components/Header/Header.css --- */
+
+/* Estilos base para el cuerpo de la página (asegura que el Header se vea bien) */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que ocupe al menos el alto de la vista */
+    font-family: 'Montserrat', sans-serif; /* Aplica la fuente globalmente */
+}
+
+/* 1. Franja Superior (Delgada - Azul Marino) */
+.top-nav {
+    background-color: #001F3F; /* Azul Marino */
+    height: 40px; /* Delgada */
+    display: flex;
+    justify-content: flex-end; /* Alinea "Iniciar Sesión" a la derecha */
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra sutil */
+}
+
+.login-link a {
+    color: #FFFFFF; /* Blanco */
+    text-decoration: none;
+    font-weight: 700; /* Negrita */
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+    color: #ADD8E6; /* Azul claro al pasar el mouse */
+}
+
+/* Estilos para el mensaje de bienvenida y el icono de cerrar sesión en top-nav */
+.welcome-message {
+    display: flex;
+    justify-content: space-between; /* Para separar el texto del icono de cerrar sesión */
+    align-items: center;
+    width: 100%; /* Ocupa todo el ancho disponible para justificar el contenido */
+}
+.welcome-message span {
+    color: #FFFFFF; /* Texto blanco */
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+/* La regla .logout-link {} vacía ha sido eliminada para evitar la advertencia del linter.
+   Los estilos para el enlace dentro de .logout-link se aplican directamente a .logout-link a. */
+.logout-link a {
+    color: #FFFFFF; /* Icono blanco */
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding-left: 15px; /* Espacio entre el texto de bienvenida y el icono */
+}
+
+.logout-link a:hover {
+    color: #FF6347; /* Rojo/Naranja para el hover, indicando cerrar sesión */
+}
+
+
+/* 2. Franja Intermedia (Gruesa - Blanca) */
+.header-branding {
+    background-color: #FFFFFF; /* Blanco */
+    height: 100px; /* Más gruesa */
+    display: flex;
+    justify-content: space-between; /* Para separar logo y texto DOM */
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
+    border-bottom: 1px solid #eee; /* Línea divisoria suave */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.branding-content {
+    display: flex;
+    align-items: center; /* Alinea el logo verticalmente */
+}
+
+.logo {
+    height: 80px; /* Tamaño del logo */
+    width: auto;
+}
+
+.text-branding {
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    justify-content: center; /* Centra el texto verticalmente */
+}
+
+.dom-text {
+    font-size: 4em; /* Mantenemos tu tamaño original */
+    font-weight: 600;
+    color: #001F3F; /* Azul Marino */
+    line-height: 1; /* Ajusta el espacio entre líneas */
+    margin-bottom: 2px; /* Pequeño espacio entre DOM y Dirección de Obras */
+    text-align: right; /* Alinea el texto a la derecha */
+}
+
+.sub-text {
+    font-size: 1.07em; /* Mantenemos tu tamaño original */
+    color: #555;
+    line-height: 1; /* Ajusta el espacio entre líneas */
+    text-align: right; /* Alinea el texto a la derecha */
+}
+
+/* Media Queries para Responsividad del Header */
+@media (max-width: 768px) {
+    .header-branding {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 20px;
+    }
+    .text-branding {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .dom-text {
+        font-size: 2.2em;
+    }
+    .sub-text {
+        font-size: 0.8em;
+    }
+    .top-nav {
+        height: 35px;
+        padding: 0 15px;
+    }
+    .login-link a, .welcome-message span {
+        font-size: 0.8em;
+    }
+    .logout-link a {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        height: 60px;
+    }
+    .dom-text {
+        font-size: 2em;
+    }
+    .sub-text {
+        font-size: 0.75em;
+    }
+    .header-branding {
+        height: 70px;
+        padding: 0 10px;
+    }
+    .logo {
+        height: 50px;
+    }
+    .dom-text {
+        font-size: 1.8em;
+    }
+    .sub-text {
+        font-size: 0.7em;
+    }
+}

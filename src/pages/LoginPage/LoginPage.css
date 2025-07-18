@@ -1,0 +1,162 @@
+/* --- src/pages/LoginPage/LoginPage.css --- */
+
+/* Reutilizamos la clase main-content form-page para el fondo y centrado */
+.main-content.form-page {
+    background-color: #001F3F; /* Fondo azul marino */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra verticalmente el contenido */
+    padding: 30px 20px;
+    overflow-y: auto;
+}
+
+.form-container.login-container {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px; /* Un ancho más compacto para el formulario de login */
+    margin: 20px auto;
+    text-align: center; /* Centra el texto dentro del contenedor */
+}
+
+.login-container h2 {
+    color: #001F3F;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.search-description { /* Reutilizamos esta clase para la descripción del login */
+    color: #666;
+    font-size: 1em;
+    margin-bottom: 30px;
+}
+
+/* Estilos para los grupos de formulario (labels e inputs) */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Alinea las etiquetas a la izquierda */
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: calc(100% - 20px); /* Ajusta el ancho para incluir padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Estilos para el botón de envío (login) */
+.submit-button {
+    background-color: #007BFF; /* Azul para el botón de login */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Estilos para mensajes de éxito/error */
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Media Queries para Responsividad de LoginPage */
+@media (max-width: 768px) {
+    .main-content.form-page {
+        padding: 20px 15px;
+    }
+    .form-container.login-container {
+        padding: 30px;
+        margin: 10px auto;
+    }
+    .login-container h2 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+    .search-description {
+        font-size: 0.95em;
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        font-size: 0.95em;
+    }
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        padding: 8px;
+        font-size: 0.95em;
+    }
+    .submit-button {
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content.form-page {
+        padding: 15px 10px;
+    }
+    .form-container.login-container {
+        padding: 20px;
+    }
+    .login-container h2 {
+        font-size: 1.5em;
+    }
+    .search-description {
+        font-size: 0.9em;
+    }
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        font-size: 0.9em;
+    }
+    .submit-button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}

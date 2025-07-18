@@ -1,0 +1,244 @@
+/* --- src/pages/UserListPage/UserListPage.css --- */
+
+/* Reutilizamos las clases generales para el diseño de página de lista */
+.main-content.list-page {
+    background-color: #001F3F; /* Fondo azul marino */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea el contenido arriba, para que el scroll funcione bien */
+    padding: 30px 20px;
+    overflow-y: auto; /* Permite el scroll vertical si la lista es larga */
+}
+
+.list-container {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    padding: 30px;
+    width: 100%;
+    max-width: 1000px; /* Ancho máximo para la tabla de usuarios */
+    margin: 20px auto;
+}
+
+.list-container h2 {
+    color: #001F3F;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+/* Estilos para el botón de "Crear Nuevo Usuario" */
+.create-user-button-container {
+    text-align: right; /* Alinea el botón a la derecha */
+    margin-bottom: 20px;
+}
+
+.create-user-button {
+    background-color: #28a745; /* Verde para crear */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none; /* Para Link de React Router */
+    display: inline-flex; /* Permite alinear el icono y texto */
+    align-items: center;
+    gap: 8px; /* Espacio entre icono y texto */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-user-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* Estilos de la tabla (reutilizados de DenunciaListPage) */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table thead {
+    background-color: #001F3F; /* Azul marino */
+    color: white;
+}
+
+.user-table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.95em;
+    border-bottom: 2px solid #001F3F;
+}
+
+.user-table tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.user-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.user-table td {
+    padding: 10px 15px;
+    font-size: 0.9em;
+    color: #333;
+    vertical-align: middle;
+}
+
+/* Estilos para el badge de rol */
+.user-table .role-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    min-width: 80px;
+    text-align: center;
+}
+
+/* Colores de roles */
+.user-table .role-badge.role-director { background-color: #007BFF; } /* Azul */
+.user-table .role-badge.role-inspector { background-color: #ffc107; color: #343a40; } /* Amarillo/Naranja */
+.user-table .role-badge.role-administrador { background-color: #6f42c1; } /* Púrpura */
+
+
+/* Estilos para los botones de acción en la tabla */
+.action-buttons-table {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.action-buttons-table button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.action-buttons-table button.edit-button {
+    background-color: #ffc107; /* Amarillo para editar */
+    color: #343a40;
+}
+.action-buttons-table button.edit-button:hover {
+    background-color: #e0a800;
+}
+
+.action-buttons-table button.delete-button {
+    background-color: #dc3545; /* Rojo para eliminar */
+}
+.action-buttons-table button.delete-button:hover {
+    background-color: #c82333;
+}
+
+.action-buttons-table button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Mensajes de carga/error/éxito */
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.message.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Media Queries para Responsividad de UserListPage */
+@media (max-width: 1024px) {
+    .list-container {
+        padding: 25px;
+    }
+    .user-table th, .user-table td {
+        padding: 10px 12px;
+        font-size: 0.85em;
+    }
+    .action-buttons-table button {
+        padding: 5px 10px;
+        font-size: 0.75em;
+    }
+    .user-table .role-badge {
+        min-width: 70px;
+        font-size: 0.75em;
+    }
+}
+
+@media (max-width: 768px) {
+    .list-container {
+        padding: 20px;
+        margin: 10px auto;
+    }
+    .list-container h2 {
+        font-size: 1.8em;
+    }
+    /* Hace que la tabla sea responsive con scroll horizontal */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Para un scroll más suave en iOS */
+    }
+    .user-table {
+        min-width: 600px; /* Asegura que la tabla no se colapse demasiado */
+    }
+    .user-table th, .user-table td {
+        padding: 8px 10px;
+        font-size: 0.8em;
+    }
+    .action-buttons-table {
+        flex-direction: column; /* Apila los botones en móviles */
+        gap: 5px;
+    }
+    .action-buttons-table button {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        font-size: 0.7em;
+    }
+    .create-user-button-container {
+        text-align: center; /* Centra el botón de crear usuario */
+    }
+}
+
+@media (max-width: 480px) {
+    .list-container {
+        padding: 15px;
+    }
+    .list-container h2 {
+        font-size: 1.5em;
+    }
+    .user-table th, .user-table td {
+        font-size: 0.75em;
+    }
+    .create-user-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
