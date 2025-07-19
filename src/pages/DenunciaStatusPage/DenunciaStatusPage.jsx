@@ -47,7 +47,7 @@ function DenunciaStatusPage() {
 
     try {
       // Realiza la petición GET al backend para consultar el estado
-      const response = await axios.get(`http://localhost:3001/api/public/denuncias/status/${publicIdInput}`);
+      const response = await axios.get(`http://backend-denuncias.onrender.com/api/public/denuncias/status/${publicIdInput}`);
 
       console.log('Respuesta del backend:', response.data);
 

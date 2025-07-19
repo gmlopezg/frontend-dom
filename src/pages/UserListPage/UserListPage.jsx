@@ -73,7 +73,7 @@ function UserListPage() {
 
       console.log('UserListPage - Intentando obtener usuarios del backend...');
       // Asumimos que tu backend tiene un endpoint GET /api/usuarios
-      const response = await axios.get('http://localhost:3001/api/usuarios', {
+      const response = await axios.get('http://backend-denuncias.onrender.com/api/usuarios', {
         headers: {
           'Authorization': `Bearer ${authToken}`
         }
@@ -151,7 +151,7 @@ function UserListPage() {
 
       console.log(`UserListPage - Confirmando eliminación de usuario ID: ${userToDeleteId}`);
       // Asumimos que tu backend tiene un endpoint DELETE /api/usuarios/:id
-      const response = await axios.delete(`http://localhost:3001/api/usuarios/${userToDeleteId}`, {
+      const response = await axios.delete(`http://backend-denuncias.onrender.com/api/usuarios/${userToDeleteId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -73,7 +73,7 @@ function DenunciaListPage() {
       }
 
       console.log('DenunciaListPage - Intentando obtener denuncias del backend...');
-      const response = await axios.get('http://localhost:3001/api/denuncias', {
+      const response = await axios.get('http://backend-denuncias.onrender.com/api/denuncias', {
         headers: {
           'Authorization': `Bearer ${authToken}`
         }
@@ -150,7 +150,7 @@ function DenunciaListPage() {
       }
 
       console.log(`DenunciaListPage - Confirmando eliminación de ID: ${denunciaToDeleteId}`);
-      const response = await axios.delete(`http://localhost:3001/api/denuncias/${denunciaToDeleteId}`, {
+      const response = await axios.delete(`http://backend-denuncias.onrender.com/api/denuncias/${denunciaToDeleteId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
