@@ -65,7 +65,7 @@ function UserFormPage() {
 
           console.log(`UserFormPage - Intentando obtener usuario con ID: ${id}`);
           // Asumimos que tu backend tiene un endpoint GET /api/usuarios/:id
-          const response = await axios.get(`http://backend-denuncias.onrender.com/api/usuarios/${id}`, {
+          const response = await axios.get(`https://backend-denuncias.onrender.com/api/usuarios/${id}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const userData = response.data;
@@ -135,11 +135,11 @@ function UserFormPage() {
         if (!dataToUpdate.password) {
           delete dataToUpdate.password; // No enviar campo de contraseña vacío
         }
-        response = await axios.put(`http://backend-denuncias.onrender.com/api/usuarios/${id}`, dataToUpdate, {
+        response = await axios.put(`https://backend-denuncias.onrender.com/api/usuarios/${id}`, dataToUpdate, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
       } else {
-        response = await axios.post('http://backend-denuncias.onrender.com/api/usuarios/register', formData, {
+        response = await axios.post('https://backend-denuncias.onrender.com/api/usuarios/register', formData, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
       }

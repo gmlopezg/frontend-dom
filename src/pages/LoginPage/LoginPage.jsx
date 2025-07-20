@@ -19,7 +19,7 @@ function LoginPage() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://backend-denuncias.onrender.com/api/usuarios/login', { email, password });
+      const response = await axios.post('https://backend-denuncias.onrender.com/api/usuarios/login', { email, password });
 
       if (response.status === 200 && response.data.token) {
         const { token, user } = response.data;

@@ -58,7 +58,7 @@ function RegistroContribuyentePage() {
     try {
       console.log('RegistroContribuyentePage: Datos de formData a enviar:', formData); 
       
-      const response = await axios.post('http://backend-denuncias.onrender.com/api/contribuyentes/register', formData);
+      const response = await axios.post('https://backend-denuncias.onrender.com/api/contribuyentes/register', formData);
 
       if (response.status === 201) {
         setMessage('¡Registro exitoso! Ya puedes iniciar sesión con tu correo y contraseña.');

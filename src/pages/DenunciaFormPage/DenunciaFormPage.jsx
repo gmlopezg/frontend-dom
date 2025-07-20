@@ -64,7 +64,7 @@ function DenunciaFormPage() {
           }
 
           console.log(`DenunciaFormPage - Intentando obtener denuncia con ID_DENUNCIA: ${id}`);
-          const response = await axios.get(`http://backend-denuncias.onrender.com/api/denuncias/${id}`, { // Usamos 'id' directamente
+          const response = await axios.get(`https://backend-denuncias.onrender.com/api/denuncias/${id}`, { // Usamos 'id' directamente
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const denunciaData = response.data;
@@ -140,12 +140,12 @@ function DenunciaFormPage() {
       let response;
       if (isEditing) {
         console.log(`DenunciaFormPage - Enviando PUT para actualizar denuncia con ID: ${id}`, formData);
-        response = await axios.put(`http://backend-denuncias.onrender.com/api/denuncias/${id}`, formData, {
+        response = await axios.put(`https://backend-denuncias.onrender.com/api/denuncias/${id}`, formData, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
       } else {
         console.log('DenunciaFormPage - Enviando POST para crear nueva denuncia:', formData);
-        response = await axios.post('http://backend-denuncias.onrender.com/api/denuncias/create', formData, {
+        response = await axios.post('https://backend-denuncias.onrender.com/api/denuncias/create', formData, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
       }

@@ -77,7 +77,7 @@ function ContribuyenteDashboardPage() {
 
         // Endpoint en el backend para obtener denuncias por contribuyente ID
         // Este endpoint necesitará autenticación y filtrar por id_contribuyente
-        const response = await axios.get(`http://backend-denuncias.onrender.com/api/contribuyentes/${contribuyenteId}/denuncias`, {
+        const response = await axios.get(`https://backend-denuncias.onrender.com/api/contribuyentes/${contribuyenteId}/denuncias`, {
           headers: {
             'Authorization': `Bearer ${authToken}`
           }

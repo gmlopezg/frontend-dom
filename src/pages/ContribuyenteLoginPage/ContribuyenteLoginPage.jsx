@@ -19,7 +19,7 @@ function ContribuyenteLoginPage() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://backend-denuncias.onrender.com/api/contribuyentes/login', { 
+      const response = await axios.post('https://backend-denuncias.onrender.com/api/contribuyentes/login', { 
         email_contribuyente: email, 
         password 
       });

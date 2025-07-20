@@ -44,7 +44,7 @@ function PublicFormPage() {
     console.log('Datos a enviar:', formData);
 
     try {
-      const response = await axios.post('http://backend-denuncias.onrender.com/api/public/denuncias/create', formData);
+      const response = await axios.post('https://backend-denuncias.onrender.com/api/public/denuncias/create', formData);
 
       console.log('Respuesta del backend:', response.data);
 
