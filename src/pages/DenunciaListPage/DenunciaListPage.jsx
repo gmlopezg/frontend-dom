@@ -67,7 +67,7 @@ function DenunciaListPage() {
       const userRole = localStorage.getItem('userRole');
 
       // Redirige si no hay token o el rol no es autorizado
-      if (!authToken || (userRole !== 'Director' && userRole !== 'Administrador')) { // Corregido 'director_de_obras' a 'Director'
+      if (!authToken || (userRole !== 'director_de_obras' && userRole !== 'administrador')) { // Corregido 'director_de_obras' a 'Director'
         navigate('/acceso-interno');
         return;
       }
