@@ -3,10 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logoVA from '../../assets/logo_VA.png'; // Asegúrate de que la ruta sea correcta para tu logo
 
-// Importa el archivo CSS directamente en el componente si usas un bundler como Webpack/Vite
-// Aunque es más común importarlo en el archivo principal (App.js o index.js) para estilos globales.
-// import './Header.css'; // Descomenta si prefieres importar aquí, pero lee las instrucciones abajo.
-
 // Componente Header reutilizable
 // Recibe props para adaptar su contenido (login/logout, mensaje de bienvenida)
 // Añadimos 'userRole' y 'handleLogout' a las props para la lógica de sesión
@@ -41,12 +37,11 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
               <button
                 onClick={handleLogout}
                 title="Cerrar Sesión"
-                // Mantengo algunas clases Tailwind aquí para el hover y el focus,
-                // ya que tu CSS define el estilo para 'a' dentro de logout-link, no para 'button'.
-                // Si prefieres que el CSS maneje todo, podrías envolver el icono en un <a>.
+                // Mantiene algunas clases Tailwind aquí para el hover y el focus,
+                // ya que el CSS define el estilo para 'a' dentro de logout-link, no para 'button'.
                 className="text-white hover:text-gray-200 transition-colors duration-300 focus:outline-none"
               >
-                {/* Ícono de Font Awesome. Asegúrate de que Font Awesome esté enlazado en tu index.html */}
+                {/* Ícono de Font Awesome. Font Awesome enlazado en el index.html */}
                 <i className="fas fa-sign-out-alt text-lg"></i>
               </button>
             </div>
@@ -54,9 +49,18 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
         )}
       </header>
 
-      {/* 2. Franja Intermedia (Gruesa - Blanca) - Usa la clase 'header-branding' de tu CSS */}
-      <div className="header-branding">
-        <div className="branding-content"> {/* Usa la clase 'branding-content' de tu CSS */}
+      {/* 2. Franja Intermedia (Gruesa - Blanca) - Usar la clase 'header-branding' de tu CSS */}
+      {/* top-0, left-0, right-0 la posicionan en la parte superior del contenedor relativo */}
+      {/* h-[6px] le da la altura, bg-[#004080] el color, z-10 asegura que esté por encima */}
+      <div className="relative header-branding">
+        {/* Franja azul oscura (la más superior) */}
+        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#004080] z-10"></div>
+        {/* Franja blanca (justo debajo de la azul) */}
+        <div className="absolute top-[6px] left-0 right-0 h-[6px] bg-white z-10"></div>
+
+        {/* Contenido principal: Logo y Texto. Aseguramos que este contenido esté debajo de las franjas */}
+        {/* Añadimos pt-[12px] para que el contenido empiece debajo de las dos franjas de 6px cada una */}
+        <div className="flex items-center justify-between w-full pt-[12px]"> {/* Usamos justify-between aquí */}
           {/* Logo - Usa la clase 'logo' de tu CSS */}
           {/* Asegúrate de que tengas una imagen logo_VA.png en src/assets/ */}
           <img src={logoVA} alt="Logo Municipalidad" className="logo" />
