@@ -1,17 +1,18 @@
 // --- src/pages/ContribuyenteDashboardPage/ContribuyenteDashboardPage.jsx ---
-import React, { useState, useEffect, useRef } from 'react'; // Importamos useRef
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Header from '../../components/Header/Header.jsx'; // Importa el Header
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom'; // Importamos useOutletContext
+import axiosInstance from '../../api/axiosInstance'; // Importa tu instancia de Axios
 import './ContribuyenteDashboardPage.css'; // Importa los estilos CSS específicos
 
 function ContribuyenteDashboardPage() {
+  // Obtener el contexto del ProtectedLayout
+  const { userId, userName, handleLogout } = useOutletContext(); // userId será el id_contribuyente
+  const navigate = useNavigate();
+
   const [denuncias, setDenuncias] = useState([]);
   const [message, setMessage] = useState('');
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [userName, setUserName] = useState('Contribuyente'); 
-  const navigate = useNavigate();
 
   // Ref para el temporizador del mensaje
   const messageTimerRef = useRef(null);
@@ -41,8 +42,8 @@ function ContribuyenteDashboardPage() {
       return '';
     }
     switch (status.toLowerCase()) {
-      case 'registrada sin asignar': return 'status-ingresada'; // Ajustado para tu nuevo estado
-      case 'asignada': return 'status-en-revision'; // Ajustado para tu nuevo estado
+      case 'registrada sin asignar': return 'status-ingresada';
+      case 'asignada': return 'status-en-revision';
       case 'en proceso': return 'status-en-proceso';
       case 'resuelta': return 'status-resuelta';
       case 'cerrada': return 'status-cerrada';
@@ -50,20 +51,15 @@ function ContribuyenteDashboardPage() {
     }
   };
 
+  // useEffect para cargar denuncias al montar el componente o cuando el userId esté disponible
   useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    const userRole = localStorage.getItem('userRole');
-    const storedUserName = localStorage.getItem('userName');
-    const contribuyenteId = localStorage.getItem('contribuyenteId');
-
-    if (storedUserName) {
-      setUserName(storedUserName);
-    }
-
-    // Redirige si no hay token, el rol no es 'contribuyente' o falta el ID del contribuyente
-    if (!authToken || userRole !== 'contribuyente' || !contribuyenteId) {
-      console.log('ContribuyenteDashboardPage - Acceso denegado. Redirigiendo a login de contribuyentes.');
-      navigate('/acceso-contribuyente');
+    // La autenticación ya fue verificada por ProtectedLayout
+    // Solo necesitamos el userId para hacer la llamada a la API
+    if (!userId) {
+      // Esto no debería ocurrir si ProtectedLayout funciona correctamente,
+      // pero es una salvaguarda.
+      console.error("ContribuyenteDashboardPage: userId no disponible. Redirigiendo a login.");
+      handleLogout(); // Forzar cierre de sesión si el ID no está disponible
       return;
     }
 
@@ -72,18 +68,11 @@ function ContribuyenteDashboardPage() {
       setMessage(''); // Limpiamos el mensaje antes de cargar
       setIsError(false);
       try {
-        console.log(`ContribuyenteDashboardPage - Intentando obtener denuncias para contribuyente ID: ${contribuyenteId}`);
-        console.log(`ContribuyenteDashboardPage - Usando Token: ${authToken ? 'Presente' : 'Ausente'}`); // Solo indica si está presente
+        console.log(`ContribuyenteDashboardPage - Intentando obtener denuncias para contribuyente ID: ${userId}`);
 
-        // Endpoint en el backend para obtener denuncias por contribuyente ID
-        // Este endpoint necesitará autenticación y filtrar por id_contribuyente
-        const response = await axios.get(`https://backend-denuncias.onrender.com/api/contribuyentes/${contribuyenteId}/denuncias`, {
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
-        });
-
-        console.log('ContribuyenteDashboardPage - Respuesta del backend recibida:', response.data);
+        // Usar axiosInstance para que el token se adjunte automáticamente
+        const response = await axiosInstance.get(`/api/contribuyentes/${userId}/denuncias`);
+        console.log('ContribuyenteDashboardPage - Denuncias recibidas:', response.data);
 
         if (response.status === 200) {
           if (Array.isArray(response.data)) {
@@ -99,11 +88,15 @@ function ContribuyenteDashboardPage() {
       } catch (error) {
         console.error('ContribuyenteDashboardPage - Error al obtener denuncias:', error);
         let errorMessage = 'Error al cargar tus denuncias. Por favor, inténtalo de nuevo.';
-        if (error.response && error.response.status === 401) {
-          errorMessage = 'No autorizado. Tu sesión ha expirado o no tienes permisos.';
-          navigate('/acceso-contribuyente');
-        } else if (error.response && error.response.data && error.response.data.message) {
-          errorMessage = `Error: ${error.response.data.message}`;
+        if (error.response) {
+          if (error.response.status === 401) {
+            errorMessage = 'No autorizado. Tu sesión ha expirado o no tienes permisos.';
+            handleLogout(); // Forzar cierre de sesión si el token no es válido
+          } else if (error.response.status === 403) {
+            errorMessage = 'Acceso denegado. No tienes permiso para ver estas denuncias (ID de URL vs ID de token no coinciden o rol no autorizado).';
+          } else if (error.response.data && error.response.data.message) {
+            errorMessage = `Error: ${error.response.data.message}`;
+          }
         } else if (error.request) {
           errorMessage = 'Error de red: No se pudo conectar con el servidor. Asegúrate de que el backend esté corriendo y el endpoint de denuncias del contribuyente exista.';
         }
@@ -115,102 +108,95 @@ function ContribuyenteDashboardPage() {
 
     fetchDenuncias();
     return () => clearMessageTimer(); // Limpiar el temporizador al desmontar
-  }, [navigate]);
+  }, [userId, handleLogout]); // Dependencia del userId y handleLogout (del contexto)
 
-  // Función para cerrar sesión
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('contribuyenteId');
-    navigate('/acceso-contribuyente');
-  };
+  // ELIMINADO: La función handleLogout interna de este componente.
+  // Ahora se usa la función handleLogout del contexto.
+  // ELIMINADO: La importación de Header y su uso directo.
 
   return (
-    <>
-      <Header type="internal" userName={userName} onLogout={handleLogout} />
-      <main className="main-content dashboard-page">
-        <div className="dashboard-container">
-          <h2>Dashboard del Contribuyente</h2>
+    <main className="main-content dashboard-page">
+      <div className="dashboard-container">
+        <h2>Dashboard del Contribuyente</h2>
 
-          <div className="dashboard-info-card">
-            <p>Bienvenido, <strong>{userName}</strong>. Aquí puedes ver el estado de las denuncias que has presentado.</p>
-          </div>
-
-          <div className="denuncia-list-section">
-            <h3>Tus Denuncias</h3>
-
-            {isLoading && <p className="message info">Cargando tus denuncias...</p>}
-            {message && !isLoading && ( // Muestra el mensaje si existe y no está cargando
-              <p className={`message ${isError ? 'error' : 'success'}`}> {/* Clase 'success' para mensajes de éxito */}
-                {message}
-              </p>
-            )}
-
-            {!isLoading && denuncias.length === 0 && !isError && (
-              <p className="message info">No has presentado ninguna denuncia aún.</p>
-            )}
-
-            {!isLoading && denuncias.length > 0 && (
-              <div className="table-responsive">
-                <table className="contribuyente-denuncia-table">
-                  <thead>
-                    <tr>
-                      <th>ID Público</th>
-                      <th>Título</th>
-                      <th>Descripción</th>
-                      <th>Estado</th>
-                      <th>Fecha Ingreso</th>
-                      <th>Última Actualización</th>
-                      <th>Inspector Asignado</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {denuncias.map((denuncia) => (
-                      <tr key={denuncia.id_denuncia}>
-                        <td>{denuncia.public_id}</td>
-                        <td>{denuncia.titulo}</td>
-                        <td>
-                          {denuncia.descripcion_denuncia // Usamos descripcion_denuncia como en tu DenunciaListPage
-                            ? (denuncia.descripcion_denuncia.length > 50
-                               ? denuncia.descripcion_denuncia.substring(0, 50) + '...'
-                               : denuncia.descripcion_denuncia)
-                            : 'N/A'}
-                        </td>
-                        <td>
-                          <span className={`status-badge ${getStatusBadgeClass(denuncia.estado_actual)}`}>
-                            {denuncia.estado_actual || 'N/A'}
-                          </span>
-                        </td>
-                        <td>
-                          {denuncia.fecha_creacion ?
-                            (() => {
-                              const date = new Date(denuncia.fecha_creacion);
-                              return isNaN(date.getTime()) ? 'Fecha Inválida' : date.toLocaleDateString();
-                            })()
-                            : 'N/A'
-                          }
-                        </td>
-                        <td>
-                          {denuncia.fecha_estado_actual ?
-                            (() => {
-                              const date = new Date(denuncia.fecha_estado_actual);
-                              return isNaN(date.getTime()) ? 'Fecha Inválida' : date.toLocaleDateString();
-                            })()
-                            : 'N/A'
-                          }
-                        </td>
-                        <td>{denuncia.inspector_asignado || 'No Asignado'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
+        <div className="dashboard-info-card">
+          <p>Bienvenido, <strong>{userName || 'Contribuyente'}</strong>. Aquí puedes ver el estado de las denuncias que has presentado.</p>
+          {userId && <p className="text-sm text-gray-500">Tu ID de Contribuyente: {userId}</p>}
         </div>
-      </main>
-    </>
+
+        <div className="denuncia-list-section">
+          <h3>Tus Denuncias</h3>
+
+          {isLoading && <p className="message info">Cargando tus denuncias...</p>}
+          {message && !isLoading && (
+            <p className={`message ${isError ? 'error' : 'success'}`}>
+              {message}
+            </p>
+          )}
+
+          {!isLoading && denuncias.length === 0 && !isError && (
+            <p className="message info">No has presentado ninguna denuncia aún.</p>
+          )}
+
+          {!isLoading && denuncias.length > 0 && (
+            <div className="table-responsive">
+              <table className="contribuyente-denuncia-table">
+                <thead>
+                  <tr>
+                    <th>ID Público</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Fecha Ingreso</th>
+                    <th>Última Actualización</th>
+                    <th>Inspector Asignado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {denuncias.map((denuncia) => (
+                    <tr key={denuncia.id_denuncia}>
+                      <td>{denuncia.public_id || 'N/A'}</td> {/* Asegúrate de que el backend envíe 'public_id' */}
+                      <td>{denuncia.titulo}</td>
+                      <td>
+                        {denuncia.descripcion_denuncia
+                          ? (denuncia.descripcion_denuncia.length > 50
+                              ? denuncia.descripcion_denuncia.substring(0, 50) + '...'
+                              : denuncia.descripcion_denuncia)
+                          : 'N/A'}
+                      </td>
+                      <td>
+                        <span className={`status-badge ${getStatusBadgeClass(denuncia.estado_actual)}`}>
+                          {denuncia.estado_actual || 'N/A'}
+                        </span>
+                      </td>
+                      <td>
+                        {denuncia.fecha_creacion ?
+                          (() => {
+                            const date = new Date(denuncia.fecha_creacion);
+                            return isNaN(date.getTime()) ? 'Fecha Inválida' : date.toLocaleDateString();
+                          })()
+                          : 'N/A'
+                        }
+                      </td>
+                      <td>
+                        {denuncia.fecha_estado_actual ?
+                          (() => {
+                            const date = new Date(denuncia.fecha_estado_actual);
+                            return isNaN(date.getTime()) ? 'Fecha Inválida' : date.toLocaleDateString();
+                          })()
+                          : 'N/A'
+                        }
+                      </td>
+                      <td>{denuncia.inspector_asignado || 'No Asignado'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
+    </main>
   );
 }
 

@@ -1,7 +1,7 @@
 // --- src/pages/LoginPage/LoginPage.jsx ---
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from 'axios'; // Usaremos axios directamente ya que no estás usando axiosInstance aquí
 import './LoginPage.css';
 
 function LoginPage() {
@@ -19,19 +19,24 @@ function LoginPage() {
     setIsLoading(true);
 
     try {
+      // Asegúrate de que esta URL sea la correcta para tu backend
       const response = await axios.post('https://backend-denuncias.onrender.com/api/usuarios/login', { email, password });
 
       if (response.status === 200 && response.data.token) {
         const { token, user } = response.data;
         
-        // --- CAMBIO CLAVE AQUÍ: Asegura que userName siempre tenga un valor válido ---
-        // Prioriza nombre_usuario, luego email, luego un genérico
-        const displayUserName = user.nombre_usuario || user.email || 'Usuario Interno';
+        // --- CAMBIO CLAVE AQUÍ: Guardar el userId ---
+        // user.id_usuario es el ID del usuario/contribuyente que viene del backend
+        localStorage.setItem('userId', user.id_usuario); 
+        console.log('LoginPage: Guardando userId en localStorage:', user.id_usuario); // DEBUG
+
+        // Asegura que userName siempre tenga un valor válido
+        const displayUserName = user.nombre_usuario || user.email || 'Usuario';
         localStorage.setItem('userName', displayUserName);
         console.log('LoginPage: Guardando userName en localStorage:', displayUserName); // DEBUG
 
         localStorage.setItem('authToken', token);
-        localStorage.setItem('userRole', user.rol); // El rol debe venir del backend (ej. 'director_de_obras', 'inspector', 'administrador')
+        localStorage.setItem('userRole', user.rol); // El rol debe venir del backend (ej. 'director_de_obras', 'inspector', 'administrador', 'contribuyente')
         console.log('LoginPage: Rol del usuario recibido del backend y guardado:', user.rol); // DEBUG
 
         setMessage('Inicio de sesión exitoso.');
@@ -39,17 +44,20 @@ function LoginPage() {
 
         // Redirige según el rol del usuario (usando los roles EXACTOS del backend en minúsculas)
         switch (user.rol) {
-          case 'director_de_obras': 
-            navigate('/dashboard/director');
-            break;
+          case 'director_de_obras':
           case 'inspector':
-            navigate('/dashboard/inspector'); // Asegúrate de tener esta ruta si existe
-            break;
           case 'administrador':
-            navigate('/dashboard/administrador'); // Asegúrate de tener esta ruta si existe
+            navigate('/dashboard'); // Redirige al dashboard general para usuarios DOM
+            break;
+          case 'contribuyente':
+            navigate('/contribuyente-dashboard'); // Redirige al dashboard del contribuyente
             break;
           default:
-            navigate('/');
+            // Si el rol no es reconocido, redirige a una página por defecto o muestra un error
+            setMessage('Rol de usuario no reconocido. Contacta al administrador.');
+            setIsError(true);
+            localStorage.clear(); // Limpia la sesión si el rol no es válido
+            navigate('/'); // O a una página de error/login
             break;
         }
       } else {
@@ -59,10 +67,14 @@ function LoginPage() {
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
       let errorMessage = 'Error en el inicio de sesión. Inténtalo de nuevo.';
-      if (error.response && error.response.data && error.response.data.message) {
-        errorMessage = `Error: ${error.response.data.message}`;
-      } else if (error.response && error.response.status === 401) {
-        errorMessage = 'Credenciales incorrectas.';
+      if (error.response) {
+        if (error.response.status === 401) {
+          errorMessage = 'Credenciales incorrectas.';
+        } else if (error.response.data && error.response.data.message) {
+          errorMessage = `Error: ${error.response.data.message}`;
+        }
+      } else if (error.request) {
+        errorMessage = 'Error de red: No se pudo conectar con el servidor. Asegúrate de que el backend esté corriendo.';
       }
       setMessage(errorMessage);
       setIsError(true);
