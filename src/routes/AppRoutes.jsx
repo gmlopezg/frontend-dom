@@ -111,9 +111,9 @@ const AppRoutes = () => {
       <Route path="/denuncias/status/:publicId" element={<><Header type="public" /><DenunciaStatusPage /></>} />
       <Route path="/registro-contribuyente" element={<><Header type="public" /><RegistroContribuyentePage /></>} />
 
-      {/* Rutas de Login */}
-      <Route path="/acceso-interno" element={<LoginPage />} />
-      <Route path="/acceso-contribuyente" element={<ContribuyenteLoginPage />} />
+      {/* Rutas de Login - AHORA CON HEADER PÚBLICO */}
+      <Route path="/acceso-interno" element={<><Header type="public" /><LoginPage /></>} />
+      <Route path="/acceso-contribuyente" element={<><Header type="public" /><ContribuyenteLoginPage /></>} />
 
       {/* Rutas Protegidas por el ProtectedLayout */}
       {/* Todas las rutas anidadas aquí tendrán el Header y la lógica de autenticación */}

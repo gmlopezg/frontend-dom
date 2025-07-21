@@ -49,18 +49,20 @@
   padding: 1rem 2rem; /* Más padding para que sea más gruesa */
   display: flex;
   align-items: center;
+  justify-content: space-between; /* ¡NUEVO! Empuja el logo a la izquierda y el texto a la derecha */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil */
 }
 
 .logo {
   height: 60px; /* Tamaño del logo */
-  margin-right: 1.5rem; /* Espacio a la derecha del logo */
+  /* margin-right: 1.5rem; <-- ELIMINADO: justify-content: space-between lo maneja */
 }
 
 .text-branding {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: right; /* Alinea el texto a la derecha dentro de su contenedor */
 }
 
 .dom-text {
@@ -89,7 +91,7 @@
 
   .logo {
     height: 50px;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
   }
 
   .dom-text {
@@ -122,5 +124,8 @@
   .logo {
     margin-right: 0;
     margin-bottom: 0.5rem;
+  }
+  .text-branding {
+    text-align: center; /* Centrar el texto en pantallas muy pequeñas */
   }
 }
