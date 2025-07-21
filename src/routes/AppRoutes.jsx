@@ -1,9 +1,9 @@
 // --- src/routes/AppRoutes.jsx ---
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useNavigate, Link, Outlet, useOutletContext } from 'react-router-dom';
 
 // Importa tu instancia de Axios (asegúrate de que la ruta sea correcta)
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from '../api/axiosInstance'; // <-- Esta línea es crucial
 
 // --- Importamos todos los componentes de las páginas ---
 // Componentes Públicos
@@ -24,7 +24,7 @@ import DenunciaFormPage from '../pages/DenunciaFormPage/DenunciaFormPage.jsx';
 import UserListPage from '../pages/UserListPage/UserListPage.jsx';
 import UserFormPage from '../pages/UserFormPage/UserFormPage.jsx';
 
-// --- Componente GlobalHeader (adaptado de tu Header) ---
+// --- Componente GlobalHeader ---
 // Este componente reemplazará al Header importado directamente en AppRoutes
 const GlobalHeader = () => {
   // Obtener el contexto del ProtectedLayout para acceder a la información de la sesión

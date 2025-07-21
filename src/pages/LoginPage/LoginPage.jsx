@@ -1,7 +1,7 @@
 // --- src/pages/LoginPage/LoginPage.jsx ---
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Usaremos axios directamente ya que no estás usando axiosInstance aquí
+import axios from 'axios'; // Usaremos axios directamente aquí
 import './LoginPage.css';
 
 function LoginPage() {
@@ -25,7 +25,7 @@ function LoginPage() {
       if (response.status === 200 && response.data.token) {
         const { token, user } = response.data;
         
-        // --- CAMBIO CLAVE AQUÍ: Guardar el userId ---
+        // --- CRUCIAL: Guardar el userId ---
         // user.id_usuario es el ID del usuario/contribuyente que viene del backend
         localStorage.setItem('userId', user.id_usuario); 
         console.log('LoginPage: Guardando userId en localStorage:', user.id_usuario); // DEBUG
