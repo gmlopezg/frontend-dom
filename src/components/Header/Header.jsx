@@ -1,8 +1,10 @@
 // --- src/components/Header/Header.jsx ---
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoVA from '../../assets/logo_VA.png';
+import logoVA from '../../assets/logo_VA.png'; // Asegúrate de que la ruta sea correcta para tu logo
 
+// ¡Importa los estilos CSS específicos para este componente!
+import './Header.css';
 
 function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLogout }) {
   // Función para formatear el rol para mostrarlo de forma legible
@@ -16,7 +18,7 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
 
   return (
     <>
-      {/* 1. Franja Superior (Delgada - Azul Marino) - Usa la clase 'top-nav' de tu index.css */}
+      {/* 1. Franja Superior (Delgada - Azul Marino) - Usa la clase 'top-nav' */}
       <header className="top-nav">
         {/* Lógica condicional para mostrar "Iniciar Sesión" o "Bienvenido, [Rol Dinámico]" */}
         {type === 'public' ? (
@@ -27,19 +29,17 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
             </Link>
           </div>
         ) : (
-          <div className="welcome-message"> {/* Usa la clase 'welcome-message' de tu index.css */}
+          <div className="welcome-message">
             {/* Mensaje dinámico basado en el rol del usuario */}
             <span>Bienvenido, {displayRole}</span>
-            <div className="logout-link"> {/* Usa la clase 'logout-link' de tu index.css */}
+            <div className="logout-link">
               {/* El botón de cerrar sesión llama a la función handleLogout pasada por props */}
               <button
                 onClick={handleLogout}
                 title="Cerrar Sesión"
-                // Estas clases de Tailwind son un fallback para hover/focus si tu CSS no los cubre
-                className="text-white hover:text-gray-200 transition-colors duration-300 focus:outline-none"
               >
                 {/* Ícono de Font Awesome. Asegúrate de que Font Awesome esté enlazado en tu index.html */}
-                <i className="fas fa-sign-out-alt text-lg"></i>
+                <i className="fas fa-sign-out-alt"></i>
               </button>
             </div>
           </div>
@@ -47,16 +47,15 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
       </header>
 
       {/* 2. Franja Intermedia (Gruesa - Blanca) */}
-      {/* Usa la clase 'header-branding' de tu index.css, que ya tiene display: flex y justify-content: space-between */}
       <div className="header-branding">
-        {/* Logo - Es el primer hijo directo, se alineará a la izquierda por justify-content: space-between */}
+        {/* Logo */}
         <img src={logoVA} alt="Logo Municipalidad" className="logo" />
 
-        {/* Contenedor del texto "DOM Dirección de Obras" - Es el segundo hijo directo, se alineará a la derecha */}
+        {/* Contenedor del texto "DOM Dirección de Obras" */}
         <div className="text-branding">
-          {/* Texto "DOM" - Usa la clase 'dom-text' de tu index.css */}
+          {/* Texto "DOM" */}
           <span className="dom-text">DOM</span>
-          {/* Texto "Dirección de Obras" - Usa la clase 'sub-text' de tu index.css */}
+          {/* Texto "Dirección de Obras" */}
           <span className="sub-text">Dirección de Obras</span>
         </div>
       </div>

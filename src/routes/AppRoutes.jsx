@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useNavigate, Link, Outlet, useOutletContext } from 'react-router-dom';
 
-
+// Importa tu instancia de Axios (asegúrate de que la ruta sea correcta)
 import axiosInstance from '../api/axiosInstance';
 
 // --- Importamos el componente Header ---
@@ -72,25 +72,25 @@ const ProtectedLayout = () => {
     setUserId(null);
     console.log('ProtectedLayout: Sesión cerrada. Redirigiendo a login.');
     // Redirige al login apropiado después de cerrar sesión
-    
+    // Podrías tener una lógica más sofisticada aquí si hay múltiples tipos de login
     navigate('/acceso-interno', { replace: true });
   };
 
   // Mostrar un spinner o nada mientras se verifica la autenticación
   if (!userRole) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="text-indigo-600 text-xl font-semibold">Cargando...</div>
+      <div className="loading-message-container">
+        <div className="loading-message">Cargando...</div>
       </div>
     );
   }
 
   // Si está autenticado, renderizar el Header y el contenido de la ruta hija
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="protected-layout-container">
       {/* Aquí usamos el componente Header. Le pasamos el tipo 'private' y los datos del usuario */}
       <Header type="private" userName={userName} userRole={userRole} handleLogout={handleLogout} />
-      <div className="flex-grow">
+      <div className="protected-layout-content">
         {/* Outlet pasa las props userRole, userName, userId, handleLogout a los componentes hijos */}
         <Outlet context={{ userRole, userName, userId, handleLogout }} />
       </div>
@@ -136,7 +136,7 @@ const AppRoutes = () => {
 
       {/* Ruta de fallback para cualquier otra URL no definida */}
       <Route path="*" element={
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 text-gray-700 text-xl">
+        <div className="not-found-message">
           Página no encontrada (404)
         </div>
       } />

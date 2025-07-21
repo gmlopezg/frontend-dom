@@ -1,54 +1,290 @@
 /* --- src/index.css --- */
 
-/* Importa la fuente Montserrat de Google Fonts */
-/* Si estás usando Google Fonts de otra manera (ej. en index.html), puedes comentar esto */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); /* Asegurarse de tener Inter también */
+/* Importación de fuente Inter (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-
-html {
-    height: 100%;
-    box-sizing: border-box;
-}
-
+/* Estilos Generales del Cuerpo */
 body {
-    font-family: 'Montserrat', sans-serif; /* Puedes usar Montserrat o Inter como principal */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    height: 100%;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f0f2f5; /* Un gris claro para el fondo general */
+  color: #333; /* Color de texto predeterminado */
+  line-height: 1.6;
 }
 
-/* 3. Área Principal de Contenido (Azul Marino) - Mantiene aquí */
-.main-app-content {
-    background-color: #001F3F; /* Azul Marino */
-    flex-grow: 1; /* Hace que este div ocupe el resto del espacio disponible */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 40px 20px;
-    overflow: auto;
+/* Contenedor principal de la aplicación para asegurar que ocupe toda la altura */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que la aplicación ocupe al menos toda la altura de la ventana */
 }
 
-/* Media Queries Globales (si tienes alguna que no sea específica del header) */
-/* Por ejemplo, si tienes ajustes para .main-app-content en diferentes tamaños */
-@media (max-width: 768px) {
-    .main-app-content {
-        padding: 30px 15px;
-    }
+/* Contenido principal de la aplicación */
+.main-content {
+  flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+  padding: 2rem;
+  max-width: 1200px; /* Ancho máximo para el contenido principal */
+  margin: 0 auto; /* Centra el contenido principal */
+  width: 100%;
+  box-sizing: border-box; /* Incluye padding en el ancho total */
 }
 
-@media (max-width: 480px) {
-    .main-app-content {
-        padding: 20px 10px;
-    }
+/* Estilos específicos para páginas de formulario (login, registro, etc.) */
+.form-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinea arriba para evitar que el formulario se centre verticalmente en pantallas grandes */
+  padding-top: 3rem; /* Espacio superior para separar del header */
+  padding-bottom: 3rem; /* Espacio inferior */
 }
 
-/* NOTA IMPORTANTE: Los estilos específicos de formulario, tarjetas y dashboard
-   DEBEN ir en sus respectivos archivos CSS de componentes/páginas (ej. PublicFormPage.css)
-   para mantener la modularidad y evitar un archivo CSS global gigante.
-*/
+.form-container {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 0.75rem; /* Bordes redondeados */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 100%;
+  max-width: 450px; /* Ancho máximo del formulario */
+  text-align: center;
+}
+
+.form-container h2 {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700; /* Bold */
+  color: #002D62; /* Azul oscuro */
+  margin-bottom: 1.5rem; /* Espacio debajo del título */
+}
+
+.search-description {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem; /* Espacio entre grupos de formulario */
+  text-align: left; /* Alinea etiquetas a la izquierda */
+}
+
+.form-group label {
+  display: block; /* Cada etiqueta en su propia línea */
+  margin-bottom: 0.5rem; /* Espacio entre etiqueta e input */
+  font-weight: 500; /* Semibold */
+  color: #333;
+}
+
+.form-group input {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 0.75rem 1rem; /* Padding interno */
+  border: 1px solid #d1d5db; /* Borde gris claro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  font-size: 1rem;
+  color: #333;
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Transición suave para focus */
+}
+
+.form-group input:focus {
+  outline: none; /* Elimina el contorno predeterminado */
+  border-color: #0056b3; /* Borde azul al enfocar */
+  box-shadow: 0 0 0 3px rgba(0, 90, 178, 0.25); /* Sombra al enfocar */
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  background-color: #0056b3; /* Azul primario */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600; /* Semibold */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transición suave */
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #004494; /* Azul más oscuro al pasar el ratón */
+  transform: translateY(-2px); /* Pequeño efecto de elevación */
+}
+
+.submit-button:disabled {
+  background-color: #a0aec0; /* Gris al estar deshabilitado */
+  cursor: not-allowed;
+  transform: none;
+}
+
+.message {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.message.error {
+  background-color: #fee2e2; /* Rojo muy claro */
+  color: #ef4444; /* Rojo */
+  border: 1px solid #fca5a5; /* Borde rojo claro */
+}
+
+.message.success {
+  background-color: #d1fae5; /* Verde muy claro */
+  color: #10b981; /* Verde */
+  border: 1px solid #a7f3d0; /* Borde verde claro */
+}
+
+.register-link {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.register-link a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para la lista de denuncias (ejemplo, puedes expandirlos) */
+.denuncia-list-container {
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.denuncia-list-container h2 {
+  font-size: 2rem;
+  color: #002D62;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.denuncia-card {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.denuncia-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+.denuncia-card strong {
+  color: #1f2937;
+}
+
+.denuncia-card .status {
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.status.pendiente {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.status.en-proceso {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.status.resuelta {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.status.rechazada {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+/* Estilos para el spinner de carga */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #0056b3;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Grid para las tarjetas de denuncia */
+@media (min-width: 768px) {
+  .denuncia-list-container .grid-cols-1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .denuncia-list-container .grid-cols-1 {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas grandes */
+  }
+}
+
+/* Estilos para el mensaje de carga en ProtectedLayout */
+.loading-message-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f2f5; /* Color de fondo similar al body */
+}
+
+.loading-message {
+  color: #4a5568; /* Un gris oscuro */
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600; /* Semibold */
+}
+
+/* Estilos para el contenedor principal del layout protegido */
+.protected-layout-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.protected-layout-content {
+  flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+}
+
+/* Estilos para el mensaje de página no encontrada */
+.not-found-message {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f2f5;
+  color: #4a5568;
+  font-size: 1.25rem;
+}

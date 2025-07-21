@@ -1,150 +1,126 @@
 /* --- src/components/Header/Header.css --- */
 
-/* Estilos Generales para el Header */
-header {
-    font-family: 'Inter', sans-serif; /* Asegura que se use la fuente Inter */
-}
-
-/* 1. Franja Superior (Azul Marino) */
+/* Franja Superior (Delgada - Azul Marino) */
 .top-nav {
-    background-color: #004080; /* Azul Marino */
-    color: white;
-    padding: 0.5rem 2rem; /* Espaciado interno */
-    display: flex;
-    justify-content: flex-end; /* Alinea el contenido a la derecha */
-    align-items: center;
-    font-size: 0.85rem; /* Tamaño de fuente ligeramente más pequeño */
-    height: 30px; /* Altura fija para una barra más delgada */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    width: 100%; /* Ocupa todo el ancho disponible */
-    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+  background-color: #002D62; /* Azul marino oscuro */
+  color: white;
+  padding: 0.5rem 2rem; /* Padding vertical y horizontal */
+  display: flex;
+  justify-content: flex-end; /* Alinea el contenido a la derecha */
+  align-items: center;
+  font-size: 0.9rem;
 }
 
 .login-link a,
-.logout-link button {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s ease; /* Transición suave para el color al pasar el ratón */
-    display: flex; /* Para alinear el ícono y el texto si los hubiera */
-    align-items: center;
-    gap: 0.5rem; /* Espacio entre ícono y texto */
+.welcome-message span {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-.login-link a:hover,
-.logout-link button:hover {
-    color: #a0aec0; /* Gris claro al pasar el ratón */
+.login-link a:hover {
+  color: #d1d5db; /* Gris claro al pasar el ratón */
 }
 
 .welcome-message {
-    display: flex;
-    align-items: center;
-    gap: 1rem; /* Espacio entre el mensaje de bienvenida y el botón de cerrar sesión */
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Espacio entre el mensaje de bienvenida y el botón de logout */
 }
 
 .logout-link button {
-    background: none; /* Sin fondo */
-    border: none; /* Sin borde */
-    cursor: pointer; /* Cursor de puntero al pasar el ratón */
-    padding: 0; /* Elimina el padding predeterminado del botón */
-    font-size: inherit; /* Hereda el tamaño de fuente del padre */
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem; /* Tamaño del ícono */
+  transition: color 0.3s ease;
+  padding: 0; /* Eliminar padding por defecto del botón */
 }
 
-/* 2. Franja Intermedia (Blanca) - Contiene el Logo y el Texto "DOM Dirección de Obras" */
+.logout-link button:hover {
+  color: #d1d5db; /* Gris claro al pasar el ratón */
+}
+
+/* Franja Intermedia (Gruesa - Blanca) */
 .header-branding {
-    background-color: white;
-    padding: 1rem 2rem; /* Espaciado interno */
-    display: flex;
-    justify-content: space-between; /* Empuja el logo a la izquierda y el texto a la derecha */
-    align-items: center; /* Centra verticalmente los elementos */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
-    position: relative; /* Necesario para la franja azul superior absoluta */
-    z-index: 10; /* Asegura que esté por encima de otros contenidos si es necesario */
-    height: 100px; /* Altura fija para la barra blanca */
-    width: 100%; /* Ocupa todo el ancho disponible */
-    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+  background-color: #ffffff; /* Blanco */
+  padding: 1rem 2rem; /* Más padding para que sea más gruesa */
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil */
 }
 
-/* Franja azul oscura en la parte superior de la barra blanca (pseudo-elemento) */
-.header-branding::before {
-    content: ''; /* Contenido vacío para el pseudo-elemento */
-    position: absolute; /* Posicionamiento absoluto dentro de .header-branding */
-    top: 0; /* Alineado al borde superior */
-    left: 0; /* Alineado al borde izquierdo */
-    right: 0; /* Alineado al borde derecho */
-    height: 6px; /* Altura de la franja azul */
-    background-color: #004080; /* Color azul oscuro */
-    z-index: 1; /* Asegura que esté por encima del fondo blanco pero debajo del contenido principal */
-}
-
-/* Estilos para el Logo */
 .logo {
-    height: 80px; /* Altura fija para el logo */
-    width: auto; /* Mantiene la proporción de aspecto */
+  height: 60px; /* Tamaño del logo */
+  margin-right: 1.5rem; /* Espacio a la derecha del logo */
 }
 
-/* Contenedor del texto "DOM Dirección de Obras" */
 .text-branding {
-    display: flex;
-    flex-direction: column; /* Apila "DOM" y "Dirección de Obras" */
-    align-items: flex-end; /* Alinea el texto a la derecha dentro de su propio contenedor */
-    text-align: right; /* Asegura que el texto en sí esté alineado a la derecha */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Estilos para "DOM" */
 .dom-text {
-    font-size: 2.5rem; /* Fuente más grande */
-    font-weight: bold; /* Negrita */
-    color: #004080; /* Azul oscuro */
-    line-height: 1; /* Ajusta la altura de línea para evitar espacio extra */
+  font-size: 2.2rem; /* Tamaño grande para "DOM" */
+  font-weight: 700; /* Bold */
+  color: #002D62; /* Azul oscuro */
+  line-height: 1; /* Eliminar espacio extra de la línea */
 }
 
-/* Estilos para "Dirección de Obras" */
 .sub-text {
-    font-size: 1.2rem; /* Fuente más pequeña */
-    color: #333; /* Gris oscuro */
-    line-height: 1; /* Ajusta la altura de línea */
-    margin-top: 0.2rem; /* Pequeño espacio entre "DOM" y este texto */
+  font-size: 1.1rem; /* Tamaño para "Dirección de Obras" */
+  color: #555; /* Gris oscuro */
+  margin-top: 0.2rem; /* Pequeño espacio superior */
 }
 
-/* Media Queries para Responsividad del Header */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .top-nav {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-        height: 25px;
-    }
-    .header-branding {
-        height: 80px;
-        padding: 0.8rem 1rem;
-    }
-    .logo {
-        height: 60px;
-    }
-    .dom-text {
-        font-size: 2rem;
-    }
-    .sub-text {
-        font-size: 1rem;
-    }
+  .top-nav {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .header-branding {
+    padding: 0.75rem 1rem;
+  }
+
+  .logo {
+    height: 50px;
+    margin-right: 1rem;
+  }
+
+  .dom-text {
+    font-size: 1.8rem;
+  }
+
+  .sub-text {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .top-nav {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.75rem;
-        height: 20px;
-    }
-    .header-branding {
-        height: 70px;
-        padding: 0.6rem 0.8rem;
-    }
-    .logo {
-        height: 50px;
-    }
-    .dom-text {
-        font-size: 1.8rem;
-    }
-    .sub-text {
-        font-size: 0.9rem;
-    }
+  .top-nav {
+    justify-content: center; /* Centrar en pantallas muy pequeñas */
+  }
+  .welcome-message {
+    flex-direction: column; /* Apilar en pantallas muy pequeñas */
+    gap: 0.25rem;
+  }
+  .login-link a, .welcome-message span {
+    font-size: 0.75rem;
+  }
+  .logout-link button {
+    font-size: 1rem;
+  }
+  .header-branding {
+    flex-direction: column; /* Apilar logo y texto en pantallas muy pequeñas */
+    text-align: center;
+  }
+  .logo {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
 }
