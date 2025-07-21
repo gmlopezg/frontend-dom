@@ -10,7 +10,7 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
-  background-color: #002D62; /* Fondo azul marino oscuro para toda la página */
+  background-color: #002D62; /* ¡UNIFICADO! Fondo azul marino oscuro para toda la página */
   color: #fff; /* Color de texto predeterminado blanco para el fondo oscuro */
   line-height: 1.6;
 }
@@ -31,7 +31,6 @@ html, body {
   margin: 0 auto; /* Centra el contenido principal */
   width: 100%;
   box-sizing: border-box; /* Incluye padding en el ancho total */
-  /* No necesita background-color aquí, ya que los elementos internos tendrán el suyo */
 }
 
 /* Estilos específicos para páginas de formulario (login, registro, etc.) */
@@ -47,7 +46,7 @@ html, body {
 }
 
 .form-container {
-  background-color: #ffffff; /* Mantiene el fondo blanco para el formulario */
+  background-color: #ffffff; /* ¡IMPORTANTE! Mantiene el fondo blanco para el formulario */
   padding: 2.5rem;
   border-radius: 0.75rem; /* Bordes redondeados */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Sombra suave */

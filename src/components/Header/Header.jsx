@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logoVA from '../../assets/logo_VA.png'; // Asegúrate de que la ruta sea correcta para tu logo
 
-// ¡Importa los estilos CSS específicos para este componente!
+// ¡LA LÍNEA CLAVE! Importa los estilos CSS específicos para este componente.
 import './Header.css';
 
 function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLogout }) {
@@ -18,7 +18,7 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
 
   return (
     <>
-      {/* 1. Franja Superior (Delgada - Azul Marino) - Usa la clase 'top-nav' */}
+      {/* 1. Franja Superior (Delgada - Azul Marino) - Usa la clase 'top-nav' de tu Header.css */}
       <header className="top-nav">
         {/* Lógica condicional para mostrar "Iniciar Sesión" o "Bienvenido, [Rol Dinámico]" */}
         {type === 'public' ? (
@@ -29,10 +29,10 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
             </Link>
           </div>
         ) : (
-          <div className="welcome-message">
+          <div className="welcome-message"> {/* Usa la clase 'welcome-message' de tu Header.css */}
             {/* Mensaje dinámico basado en el rol del usuario */}
             <span>Bienvenido, {displayRole}</span>
-            <div className="logout-link">
+            <div className="logout-link"> {/* Usa la clase 'logout-link' de tu Header.css */}
               {/* El botón de cerrar sesión llama a la función handleLogout pasada por props */}
               <button
                 onClick={handleLogout}
@@ -47,15 +47,16 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
       </header>
 
       {/* 2. Franja Intermedia (Gruesa - Blanca) */}
+      {/* Usa la clase 'header-branding' de tu Header.css */}
       <div className="header-branding">
-        {/* Logo */}
+        {/* Logo - Usa la clase 'logo' de tu Header.css */}
         <img src={logoVA} alt="Logo Municipalidad" className="logo" />
 
-        {/* Contenedor del texto "DOM Dirección de Obras" */}
+        {/* Contenedor del texto "DOM Dirección de Obras" - Usa la clase 'text-branding' de tu Header.css */}
         <div className="text-branding">
-          {/* Texto "DOM" */}
+          {/* Texto "DOM" - Usa la clase 'dom-text' de tu Header.css */}
           <span className="dom-text">DOM</span>
-          {/* Texto "Dirección de Obras" */}
+          {/* Texto "Dirección de Obras" - Usa la clase 'sub-text' de tu Header.css */}
           <span className="sub-text">Dirección de Obras</span>
         </div>
       </div>

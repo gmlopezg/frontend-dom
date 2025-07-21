@@ -1,120 +1,150 @@
 /* --- src/components/Header/Header.css --- */
 
-.header-container {
-  background-color: #002D62; /* ¡CAMBIO AQUÍ! Ahora usa el mismo azul marino oscuro */
-  color: white;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: sticky; /* Encabezado pegajoso */
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-  box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+/* Estilos Generales para el Header */
+header {
+    font-family: 'Inter', sans-serif; /* Asegura que se use la fuente Inter */
 }
 
-.header-logo {
-  font-size: 1.75rem; /* 28px */
-  font-weight: 700; /* Bold */
-  text-decoration: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+/* 1. Franja Superior (Azul Marino) */
+.top-nav {
+    background-color: #002D62; /* ¡UNIFICADO! Azul Marino Oscuro */
+    color: white;
+    padding: 0.5rem 2rem; /* Espaciado interno */
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido a la derecha */
+    align-items: center;
+    font-size: 0.85rem; /* Tamaño de fuente ligeramente más pequeño */
+    height: 30px; /* Altura fija para una barra más delgada */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
 }
 
-.header-logo img {
-  height: 30px; /* Tamaño del icono */
-  width: auto;
+.login-link a,
+.logout-link button {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Transición suave para el color al pasar el ratón */
+    display: flex; /* Para alinear el ícono y el texto si los hubiera */
+    align-items: center;
+    gap: 0.5rem; /* Espacio entre ícono y texto */
 }
 
-.header-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 1.5rem; /* Espacio entre los elementos de navegación */
+.login-link a:hover,
+.logout-link button:hover {
+    color: #a0aec0; /* Gris claro al pasar el ratón */
 }
 
-.header-nav li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500; /* Semibold */
-  font-size: 1rem;
-  padding: 0.5rem 0; /* Padding para el área de clic */
-  transition: color 0.3s ease;
+.welcome-message {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Espacio entre el mensaje de bienvenida y el botón de cerrar sesión */
 }
 
-.header-nav li a:hover {
-  color: #a0aec0; /* Un gris claro al pasar el ratón */
+.logout-link button {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor de puntero al pasar el ratón */
+    padding: 0; /* Elimina el padding predeterminado del botón */
+    font-size: inherit; /* Hereda el tamaño de fuente del padre */
 }
 
-.header-auth-buttons {
-  display: flex;
-  gap: 1rem; /* Espacio entre los botones de autenticación */
+/* 2. Franja Intermedia (Blanca) - Contiene el Logo y el Texto "DOM Dirección de Obras" */
+.header-branding {
+    background-color: white;
+    padding: 1rem 2rem; /* Espaciado interno */
+    display: flex;
+    justify-content: space-between; /* Empuja el logo a la izquierda y el texto a la derecha */
+    align-items: center; /* Centra verticalmente los elementos */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    position: relative; /* Necesario para la franja azul superior absoluta */
+    z-index: 10; /* Asegura que esté por encima de otros contenidos si es necesario */
+    height: 100px; /* Altura fija para la barra blanca */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
 }
 
-.header-auth-buttons button {
-  background-color: #0056b3; /* Azul primario para los botones */
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+/* Franja azul oscura en la parte superior de la barra blanca (pseudo-elemento) */
+.header-branding::before {
+    content: ''; /* Contenido vacío para el pseudo-elemento */
+    position: absolute; /* Posicionamiento absoluto dentro de .header-branding */
+    top: 0; /* Alineado al borde superior */
+    left: 0; /* Alineado al borde izquierdo */
+    right: 0; /* Alineado al borde derecho */
+    height: 6px; /* Altura de la franja azul */
+    background-color: #002D62; /* ¡UNIFICADO! Azul Marino Oscuro */
+    z-index: 1; /* Asegura que esté por encima del fondo blanco pero debajo del contenido principal */
 }
 
-.header-auth-buttons button:hover {
-  background-color: #004494; /* Azul más oscuro al pasar el ratón */
-  transform: translateY(-2px);
+/* Estilos para el Logo */
+.logo {
+    height: 80px; /* Altura fija para el logo */
+    width: auto; /* Mantiene la proporción de aspecto */
 }
 
-.header-auth-buttons button.logout-button {
-  background-color: #dc2626; /* Rojo para el botón de cerrar sesión */
+/* Contenedor del texto "DOM Dirección de Obras" */
+.text-branding {
+    display: flex;
+    flex-direction: column; /* Apila "DOM" y "Dirección de Obras" */
+    align-items: flex-end; /* Alinea el texto a la derecha dentro de su propio contenedor */
+    text-align: right; /* Asegura que el texto en sí esté alineado a la derecha */
 }
 
-.header-auth-buttons button.logout-button:hover {
-  background-color: #b91c1c; /* Rojo más oscuro al pasar el ratón */
+/* Estilos para "DOM" */
+.dom-text {
+    font-size: 2.5rem; /* Fuente más grande */
+    font-weight: bold; /* Negrita */
+    color: #002D62; /* ¡UNIFICADO! Azul oscuro */
+    line-height: 1; /* Ajusta la altura de línea para evitar espacio extra */
 }
 
-/* Estilos responsivos para el encabezado */
+/* Estilos para "Dirección de Obras" */
+.sub-text {
+    font-size: 1.2rem; /* Fuente más pequeña */
+    color: #333; /* Gris oscuro */
+    line-height: 1; /* Ajusta la altura de línea */
+    margin-top: 0.2rem; /* Pequeño espacio entre "DOM" y este texto */
+}
+
+/* Media Queries para Responsividad del Header */
 @media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-  }
+    .top-nav {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        height: 25px;
+    }
+    .header-branding {
+        height: 80px;
+        padding: 0.8rem 1rem;
+    }
+    .logo {
+        height: 60px;
+    }
+    .dom-text {
+        font-size: 2rem;
+    }
+    .sub-text {
+        font-size: 1rem;
+    }
+}
 
-  .header-nav ul {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .header-nav li a {
-    display: block;
-    padding: 0.75rem 0;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .header-nav li:last-child a {
-    border-bottom: none;
-  }
-
-  .header-auth-buttons {
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .header-auth-buttons button {
-    width: 100%;
-  }
+@media (max-width: 480px) {
+    .top-nav {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+        height: 20px;
+    }
+    .header-branding {
+        height: 70px;
+        padding: 0.6rem 0.8rem;
+    }
+    .logo {
+        height: 50px;
+    }
+    .dom-text {
+        font-size: 1.8rem;
+    }
+    .sub-text {
+        font-size: 0.9rem;
+    }
 }
