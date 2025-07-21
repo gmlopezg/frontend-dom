@@ -3,6 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logoVA from '../../assets/logo_VA.png'; // Asegúrate de que la ruta sea correcta para tu logo
 
+// Importa el archivo CSS directamente en el componente si usas un bundler como Webpack/Vite
+// Aunque es más común importarlo en el archivo principal (App.js o index.js) para estilos globales.
+// import './Header.css'; // Descomenta si prefieres importar aquí, pero lee las instrucciones abajo.
+
 // Componente Header reutilizable
 // Recibe props para adaptar su contenido (login/logout, mensaje de bienvenida)
 // Añadimos 'userRole' y 'handleLogout' a las props para la lógica de sesión
@@ -18,26 +22,28 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
 
   return (
     <>
-      {/* 1. Franja superior (Top Navigation Bar - equivalente a .top-nav) */}
-      {/* Fondo azul oscuro (#004080) y texto blanco, alineado a la derecha */}
-      <header className="bg-[#004080] text-white py-1 px-5 flex justify-end items-center text-sm">
+      {/* 1. Franja Superior (Delgada - Azul Marino) - Usa la clase 'top-nav' de tu CSS */}
+      <header className="top-nav">
         {/* Lógica condicional para mostrar "Iniciar Sesión" o "Bienvenido, [Rol Dinámico]" */}
         {type === 'public' ? (
           <div className="login-link">
             {/* Usamos Link para navegar a la página de login interno */}
-            <Link to="/acceso-interno" className="text-white hover:text-gray-200 font-medium transition-colors duration-300">
+            <Link to="/acceso-interno">
               Iniciar Sesión
             </Link>
           </div>
         ) : (
-          <div className="flex items-center gap-4"> {/* Mensaje de bienvenida y botón de cerrar sesión */}
+          <div className="welcome-message"> {/* Usa la clase 'welcome-message' de tu CSS */}
             {/* Mensaje dinámico basado en el rol del usuario */}
-            <span className="text-white">Bienvenido, {displayRole}</span>
-            <div className="flex items-center">
+            <span>Bienvenido, {displayRole}</span>
+            <div className="logout-link"> {/* Usa la clase 'logout-link' de tu CSS */}
               {/* El botón de cerrar sesión llama a la función handleLogout pasada por props */}
               <button
                 onClick={handleLogout}
                 title="Cerrar Sesión"
+                // Mantengo algunas clases Tailwind aquí para el hover y el focus,
+                // ya que tu CSS define el estilo para 'a' dentro de logout-link, no para 'button'.
+                // Si prefieres que el CSS maneje todo, podrías envolver el icono en un <a>.
                 className="text-white hover:text-gray-200 transition-colors duration-300 focus:outline-none"
               >
                 {/* Ícono de Font Awesome. Asegúrate de que Font Awesome esté enlazado en tu index.html */}
@@ -48,26 +54,19 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
         )}
       </header>
 
-      {/* 2. Sección principal del encabezado (Header Branding - equivalente a .header-branding) */}
-      {/* Contiene las franjas azul/blanca, el logo y el texto "DOM Dirección de Obras" */}
-      <div className="relative bg-white shadow-md py-4 px-5 sm:px-4 flex items-center min-h-[80px]">
-        {/* Franjas decorativas (equivalente a ::before y ::after de .header-branding) */}
-        {/* Estas franjas están dentro de esta sección, en la parte superior */}
-        <div className="absolute top-0 left-0 right-0 h-[6px] bg-[#004080]"></div> {/* Franja azul oscura */}
-        <div className="absolute top-[6px] left-0 right-0 h-[6px] bg-white"></div> {/* Franja blanca */}
-
-        {/* Contenido principal: Logo y Texto */}
-        <div className="flex items-center sm:flex-col sm:text-center sm:w-full"> {/* Equivalente a .branding-content */}
-          {/* Logo (equivalente a .logo) */}
+      {/* 2. Franja Intermedia (Gruesa - Blanca) - Usa la clase 'header-branding' de tu CSS */}
+      <div className="header-branding">
+        <div className="branding-content"> {/* Usa la clase 'branding-content' de tu CSS */}
+          {/* Logo - Usa la clase 'logo' de tu CSS */}
           {/* Asegúrate de que tengas una imagen logo_VA.png en src/assets/ */}
-          <img src={logoVA} alt="Logo Municipalidad" className="h-[60px] w-auto mr-4 sm:mr-0 sm:mb-2" /> {/* Altura de 60px */}
+          <img src={logoVA} alt="Logo Municipalidad" className="logo" />
 
-          {/* Contenedor del texto "DOM Dirección de Obras" (equivalente a .text-branding) */}
-          <div className="flex flex-col justify-center sm:items-center">
-            {/* Texto "DOM" (equivalente a .dom-text) */}
-            <span className="text-[2.5em] font-bold text-[#004080] leading-none sm:text-3xl">DOM</span>
-            {/* Texto "Dirección de Obras" (equivalente a .sub-text) */}
-            <span className="text-[1.1em] text-gray-600 leading-tight sm:text-base">Dirección de Obras</span>
+          {/* Contenedor del texto "DOM Dirección de Obras" - Usa la clase 'text-branding' de tu CSS */}
+          <div className="text-branding">
+            {/* Texto "DOM" - Usa la clase 'dom-text' de tu CSS */}
+            <span className="dom-text">DOM</span>
+            {/* Texto "Dirección de Obras" - Usa la clase 'sub-text' de tu CSS */}
+            <span className="sub-text">Dirección de Obras</span>
           </div>
         </div>
       </div>
