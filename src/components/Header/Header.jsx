@@ -1,11 +1,9 @@
 // --- src/components/Header/Header.jsx ---
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoVA from '../../assets/logo_VA.png'; // Asegúrate de que la ruta sea correcta para tu logo
+import logoVA from '../../assets/logo_VA.png'; 
 
-// Componente Header reutilizable
-// Recibe props para adaptar su contenido (login/logout, mensaje de bienvenida)
-// Añadimos 'userRole' y 'handleLogout' a las props para la lógica de sesión
+
 function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLogout }) {
   // Función para formatear el rol para mostrarlo de forma legible
   const formatRoleForDisplay = (role) => {

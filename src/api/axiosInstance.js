@@ -1,17 +1,15 @@
 // --- src/api/axiosInstance.js ---
 import axios from 'axios';
 
-// Crea una instancia de Axios con una configuración base
-// IMPORTANTE: Asegúrate de que esta URL sea la URL base de tu backend en Render
+
 const axiosInstance = axios.create({
-  baseURL: 'https://backend-denuncias.onrender.com/api', // <-- ¡VERIFICA Y AJUSTA ESTA URL CON LA DE TU BACKEND!
+  baseURL: 'https://backend-denuncias.onrender.com/api', 
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Agrega un interceptor de solicitud para incluir el token de autenticación
-// Este interceptor se ejecuta antes de cada solicitud saliente
+
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken'); // Obtiene el token del localStorage
@@ -27,8 +25,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// Agrega un interceptor de respuesta para manejar errores comunes, como el 401 (No autorizado)
-// Este interceptor se ejecuta después de recibir una respuesta del servidor
+
 axiosInstance.interceptors.response.use(
   (response) => response, // Si la respuesta es exitosa, simplemente la retorna
   (error) => {

@@ -1,7 +1,7 @@
 // --- src/pages/ContribuyenteLoginPage/ContribuyenteLoginPage.jsx ---
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from 'axios'; // Usas axios directamente aquí, no axiosInstance
 import './ContribuyenteLoginPage.css'; // Importa los estilos CSS específicos
 
 function ContribuyenteLoginPage() {
@@ -19,25 +19,30 @@ function ContribuyenteLoginPage() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('https://backend-denuncias.onrender.com/api/contribuyentes/login', { 
-        email_contribuyente: email, 
-        password 
+      // Asegúrate de que esta URL sea la correcta para tu backend
+      const response = await axios.post('https://backend-denuncias.onrender.com/api/contribuyentes/login', {
+        email_contribuyente: email,
+        password
       });
 
       if (response.status === 200 && response.data.token) {
         const { token, contribuyente } = response.data;
         localStorage.setItem('authToken', token);
-        localStorage.setItem('userRole', 'contribuyente'); 
-        
-        // ¡CAMBIO CLAVE AQUÍ! Asegura que userName siempre tenga un valor
+        localStorage.setItem('userRole', 'contribuyente');
+
+        // Asegurar que userName siempre tenga un valor
         const displayUserName = contribuyente.nombre_contribuyente || contribuyente.email_contribuyente || 'Contribuyente';
-        localStorage.setItem('userName', displayUserName); 
-        localStorage.setItem('contribuyenteId', contribuyente.id_contribuyente); 
+        localStorage.setItem('userName', displayUserName);
+
+        // --- ¡LA CORRECCIÓN CLAVE ESTÁ AQUÍ! ---
+        // Guarda el ID del contribuyente bajo la clave 'userId'
+        localStorage.setItem('userId', contribuyente.id_contribuyente);
 
         setMessage('Inicio de sesión exitoso como Contribuyente.');
         setIsError(false);
-        
-        navigate('/dashboard/contribuyente'); 
+
+        // Redirige al dashboard del contribuyente
+        navigate('/contribuyente-dashboard');
 
       } else {
         setMessage('Credenciales incorrectas. Por favor, verifica tu email y contraseña.');
