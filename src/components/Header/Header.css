@@ -1,131 +1,120 @@
 /* --- src/components/Header/Header.css --- */
 
-/* Franja Superior (Delgada - Azul Marino) */
-.top-nav {
-  background-color: #002D62; /* Azul marino oscuro */
+.header-container {
+  background-color: #002D62; /* ¡CAMBIO AQUÍ! Ahora usa el mismo azul marino oscuro */
   color: white;
-  padding: 0.5rem 2rem; /* Padding vertical y horizontal */
+  padding: 1rem 2rem;
   display: flex;
-  justify-content: flex-end; /* Alinea el contenido a la derecha */
+  justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Encabezado pegajoso */
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
 }
 
-.login-link a,
-.welcome-message span {
+.header-logo {
+  font-size: 1.75rem; /* 28px */
+  font-weight: 700; /* Bold */
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-logo img {
+  height: 30px; /* Tamaño del icono */
+  width: auto;
+}
+
+.header-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem; /* Espacio entre los elementos de navegación */
+}
+
+.header-nav li a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 500; /* Semibold */
+  font-size: 1rem;
+  padding: 0.5rem 0; /* Padding para el área de clic */
   transition: color 0.3s ease;
 }
 
-.login-link a:hover {
-  color: #d1d5db; /* Gris claro al pasar el ratón */
+.header-nav li a:hover {
+  color: #a0aec0; /* Un gris claro al pasar el ratón */
 }
 
-.welcome-message {
+.header-auth-buttons {
   display: flex;
-  align-items: center;
-  gap: 1rem; /* Espacio entre el mensaje de bienvenida y el botón de logout */
+  gap: 1rem; /* Espacio entre los botones de autenticación */
 }
 
-.logout-link button {
-  background: none;
-  border: none;
+.header-auth-buttons button {
+  background-color: #0056b3; /* Azul primario para los botones */
   color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 1.2rem; /* Tamaño del ícono */
-  transition: color 0.3s ease;
-  padding: 0; /* Eliminar padding por defecto del botón */
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.logout-link button:hover {
-  color: #d1d5db; /* Gris claro al pasar el ratón */
+.header-auth-buttons button:hover {
+  background-color: #004494; /* Azul más oscuro al pasar el ratón */
+  transform: translateY(-2px);
 }
 
-/* Franja Intermedia (Gruesa - Blanca) */
-.header-branding {
-  background-color: #ffffff; /* Blanco */
-  padding: 1rem 2rem; /* Más padding para que sea más gruesa */
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* ¡NUEVO! Empuja el logo a la izquierda y el texto a la derecha */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+.header-auth-buttons button.logout-button {
+  background-color: #dc2626; /* Rojo para el botón de cerrar sesión */
 }
 
-.logo {
-  height: 60px; /* Tamaño del logo */
-  /* margin-right: 1.5rem; <-- ELIMINADO: justify-content: space-between lo maneja */
+.header-auth-buttons button.logout-button:hover {
+  background-color: #b91c1c; /* Rojo más oscuro al pasar el ratón */
 }
 
-.text-branding {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: right; /* Alinea el texto a la derecha dentro de su contenedor */
-}
-
-.dom-text {
-  font-size: 2.2rem; /* Tamaño grande para "DOM" */
-  font-weight: 700; /* Bold */
-  color: #002D62; /* Azul oscuro */
-  line-height: 1; /* Eliminar espacio extra de la línea */
-}
-
-.sub-text {
-  font-size: 1.1rem; /* Tamaño para "Dirección de Obras" */
-  color: #555; /* Gris oscuro */
-  margin-top: 0.2rem; /* Pequeño espacio superior */
-}
-
-/* Responsive adjustments */
+/* Estilos responsivos para el encabezado */
 @media (max-width: 768px) {
-  .top-nav {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
   }
 
-  .header-branding {
-    padding: 0.75rem 1rem;
+  .header-nav ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
 
-  .logo {
-    height: 50px;
-    /* margin-right: 1rem; */
-  }
-
-  .dom-text {
-    font-size: 1.8rem;
-  }
-
-  .sub-text {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .top-nav {
-    justify-content: center; /* Centrar en pantallas muy pequeñas */
-  }
-  .welcome-message {
-    flex-direction: column; /* Apilar en pantallas muy pequeñas */
-    gap: 0.25rem;
-  }
-  .login-link a, .welcome-message span {
-    font-size: 0.75rem;
-  }
-  .logout-link button {
-    font-size: 1rem;
-  }
-  .header-branding {
-    flex-direction: column; /* Apilar logo y texto en pantallas muy pequeñas */
+  .header-nav li a {
+    display: block;
+    padding: 0.75rem 0;
+    width: 100%;
     text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .logo {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
+
+  .header-nav li:last-child a {
+    border-bottom: none;
   }
-  .text-branding {
-    text-align: center; /* Centrar el texto en pantallas muy pequeñas */
+
+  .header-auth-buttons {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .header-auth-buttons button {
+    width: 100%;
   }
 }

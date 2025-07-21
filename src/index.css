@@ -10,8 +10,8 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
-  background-color: #002D62; /* ¡CAMBIO AQUÍ! Fondo azul marino oscuro para toda la página */
-  color: #fff; /* ¡CAMBIO AQUÍ! Color de texto predeterminado blanco para el fondo oscuro */
+  background-color: #002D62; /* Fondo azul marino oscuro para toda la página */
+  color: #fff; /* Color de texto predeterminado blanco para el fondo oscuro */
   line-height: 1.6;
 }
 
@@ -37,21 +37,24 @@ html, body {
 /* Estilos específicos para páginas de formulario (login, registro, etc.) */
 .form-page {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Centra el formulario horizontalmente */
   align-items: flex-start; /* Alinea arriba para evitar que el formulario se centre verticalmente en pantallas grandes */
   padding-top: 3rem; /* Espacio superior para separar del header */
   padding-bottom: 3rem; /* Espacio inferior */
   flex-grow: 1; /* Asegura que la página de formulario también ocupe el espacio restante */
+  width: 100%; /* Asegura que ocupe todo el ancho para que justify-content: center funcione */
+  box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
 }
 
 .form-container {
-  background-color: #ffffff; /* ¡IMPORTANTE! Mantiene el fondo blanco para el formulario */
+  background-color: #ffffff; /* Mantiene el fondo blanco para el formulario */
   padding: 2.5rem;
   border-radius: 0.75rem; /* Bordes redondeados */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Sombra suave */
   width: 100%;
   max-width: 450px; /* Ancho máximo del formulario */
   text-align: center;
+  box-sizing: border-box; /* Incluye padding en el ancho total */
 }
 
 .form-container h2 {
@@ -161,7 +164,7 @@ html, body {
 /* Estilos para la lista de denuncias (ejemplo, puedes expandirlos) */
 .denuncia-list-container {
   padding: 2rem;
-  background-color: #ffffff; /* ¡IMPORTANTE! Mantiene el fondo blanco para la lista */
+  background-color: #ffffff; /* Mantiene el fondo blanco para la lista */
   border-radius: 0.75rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   margin-top: 2rem;
