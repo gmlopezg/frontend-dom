@@ -3,14 +3,15 @@
 /* Importación de fuente Inter (Google Fonts) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Estilos Generales del Cuerpo */
-body {
-  font-family: 'Inter', sans-serif;
+/* Estilos Generales del Cuerpo y HTML */
+html, body {
+  height: 100%; /* Asegura que html y body ocupen toda la altura de la ventana */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f0f2f5; /* Un gris claro para el fondo general */
-  color: #333; /* Color de texto predeterminado */
+  font-family: 'Inter', sans-serif;
+  background-color: #002D62; /* ¡CAMBIO AQUÍ! Fondo azul marino oscuro para toda la página */
+  color: #fff; /* ¡CAMBIO AQUÍ! Color de texto predeterminado blanco para el fondo oscuro */
   line-height: 1.6;
 }
 
@@ -19,6 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Asegura que la aplicación ocupe al menos toda la altura de la ventana */
+  background-color: #002D62; /* Asegura que el #root también tenga el fondo azul marino */
 }
 
 /* Contenido principal de la aplicación */
@@ -29,6 +31,7 @@ body {
   margin: 0 auto; /* Centra el contenido principal */
   width: 100%;
   box-sizing: border-box; /* Incluye padding en el ancho total */
+  /* No necesita background-color aquí, ya que los elementos internos tendrán el suyo */
 }
 
 /* Estilos específicos para páginas de formulario (login, registro, etc.) */
@@ -38,10 +41,11 @@ body {
   align-items: flex-start; /* Alinea arriba para evitar que el formulario se centre verticalmente en pantallas grandes */
   padding-top: 3rem; /* Espacio superior para separar del header */
   padding-bottom: 3rem; /* Espacio inferior */
+  flex-grow: 1; /* Asegura que la página de formulario también ocupe el espacio restante */
 }
 
 .form-container {
-  background-color: #ffffff;
+  background-color: #ffffff; /* ¡IMPORTANTE! Mantiene el fondo blanco para el formulario */
   padding: 2.5rem;
   border-radius: 0.75rem; /* Bordes redondeados */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Sombra suave */
@@ -58,7 +62,7 @@ body {
 }
 
 .search-description {
-  color: #666;
+  color: #666; /* Color de texto para descripciones dentro de contenedores blancos */
   margin-bottom: 1.5rem;
   font-size: 1rem;
 }
@@ -72,7 +76,7 @@ body {
   display: block; /* Cada etiqueta en su propia línea */
   margin-bottom: 0.5rem; /* Espacio entre etiqueta e input */
   font-weight: 500; /* Semibold */
-  color: #333;
+  color: #333; /* Color de texto para etiquetas dentro de contenedores blancos */
 }
 
 .form-group input {
@@ -81,7 +85,7 @@ body {
   border: 1px solid #d1d5db; /* Borde gris claro */
   border-radius: 0.5rem; /* Bordes redondeados */
   font-size: 1rem;
-  color: #333;
+  color: #333; /* Color de texto para inputs dentro de contenedores blancos */
   box-sizing: border-box; /* Incluye padding y borde en el ancho total */
   transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Transición suave para focus */
 }
@@ -141,7 +145,7 @@ body {
 .register-link {
   margin-top: 1.5rem;
   font-size: 0.95rem;
-  color: #555;
+  color: #555; /* Color de texto para enlaces dentro de contenedores blancos */
 }
 
 .register-link a {
@@ -157,7 +161,7 @@ body {
 /* Estilos para la lista de denuncias (ejemplo, puedes expandirlos) */
 .denuncia-list-container {
   padding: 2rem;
-  background-color: #ffffff;
+  background-color: #ffffff; /* ¡IMPORTANTE! Mantiene el fondo blanco para la lista */
   border-radius: 0.75rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   margin-top: 2rem;
@@ -171,7 +175,7 @@ body {
 }
 
 .denuncia-card {
-  background-color: #f9fafb;
+  background-color: #f9fafb; /* Fondo ligeramente gris para las tarjetas individuales */
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
   padding: 1.5rem;
@@ -184,11 +188,11 @@ body {
 .denuncia-card p {
   margin: 0;
   font-size: 0.95rem;
-  color: #4b5563;
+  color: #4b5563; /* Color de texto para el contenido de las tarjetas */
 }
 
 .denuncia-card strong {
-  color: #1f2937;
+  color: #1f2937; /* Color de texto más oscuro para negritas en tarjetas */
 }
 
 .denuncia-card .status {
@@ -221,8 +225,8 @@ body {
 
 /* Estilos para el spinner de carga */
 .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #0056b3;
+  border: 4px solid rgba(255, 255, 255, 0.3); /* Color del borde del spinner para fondo oscuro */
+  border-left-color: #fff; /* Color de la parte animada del spinner */
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -258,11 +262,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f2f5; /* Color de fondo similar al body */
+  background-color: #002D62; /* Fondo azul marino para el mensaje de carga */
 }
 
 .loading-message {
-  color: #4a5568; /* Un gris oscuro */
+  color: #fff; /* Texto blanco para el mensaje de carga */
   font-size: 1.25rem; /* 20px */
   font-weight: 600; /* Semibold */
 }
@@ -272,6 +276,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #002D62; /* Fondo azul marino para el layout protegido */
 }
 
 .protected-layout-content {
@@ -284,7 +289,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f2f5;
-  color: #4a5568;
+  background-color: #002D62; /* Fondo azul marino para la página 404 */
+  color: #fff; /* Texto blanco para la página 404 */
   font-size: 1.25rem;
 }
