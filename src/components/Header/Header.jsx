@@ -37,10 +37,12 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
               <button
                 onClick={handleLogout}
                 title="Cerrar Sesión"
-
+                // Mantengo algunas clases Tailwind aquí para el hover y el focus,
+                // ya que tu CSS define el estilo para 'a' dentro de logout-link, no para 'button'.
+                // Si prefieres que el CSS maneje todo, podrías envolver el icono en un <a>.
                 className="text-white hover:text-gray-200 transition-colors duration-300 focus:outline-none"
               >
-                {/* Ícono de Font Awesome. Font Awesome enlazado en index.html */}
+                {/* Ícono de Font Awesome. Asegúrate de que Font Awesome esté enlazado en tu index.html */}
                 <i className="fas fa-sign-out-alt text-lg"></i>
               </button>
             </div>
@@ -51,7 +53,7 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
       {/* 2. Franja Intermedia (Gruesa - Blanca) */}
       {/* Usa la clase 'header-branding' de tu CSS, que ya tiene display: flex y justify-content: space-between */}
       <div className="header-branding">
-        {/* Logo - Es el primer hijo directo, se alineará a la izquierda */}
+        {/* Logo - Es el primer hijo directo, se alineará a la izquierda por justify-content: space-between */}
         <img src={logoVA} alt="Logo Municipalidad" className="logo" />
 
         {/* Contenedor del texto "DOM Dirección de Obras" - Es el segundo hijo directo, se alineará a la derecha */}
