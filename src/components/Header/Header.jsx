@@ -1,7 +1,7 @@
 // --- src/components/Header/Header.jsx ---
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoVA from '../../assets/logo_VA.png'; 
+import logoVA from '../../assets/logo_VA.png';
 
 
 function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLogout }) {
@@ -16,7 +16,7 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
 
   return (
     <>
-      {/* 1. Franja Superior (Delgada - Azul Marino) - Usa la clase 'top-nav' de tu CSS */}
+      {/* 1. Franja Superior (Delgada - Azul Marino) - Usa la clase 'top-nav' de tu index.css */}
       <header className="top-nav">
         {/* Lógica condicional para mostrar "Iniciar Sesión" o "Bienvenido, [Rol Dinámico]" */}
         {type === 'public' ? (
@@ -27,17 +27,15 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
             </Link>
           </div>
         ) : (
-          <div className="welcome-message"> {/* Usa la clase 'welcome-message' de tu CSS */}
+          <div className="welcome-message"> {/* Usa la clase 'welcome-message' de tu index.css */}
             {/* Mensaje dinámico basado en el rol del usuario */}
             <span>Bienvenido, {displayRole}</span>
-            <div className="logout-link"> {/* Usa la clase 'logout-link' de tu CSS */}
+            <div className="logout-link"> {/* Usa la clase 'logout-link' de tu index.css */}
               {/* El botón de cerrar sesión llama a la función handleLogout pasada por props */}
               <button
                 onClick={handleLogout}
                 title="Cerrar Sesión"
-                // Mantengo algunas clases Tailwind aquí para el hover y el focus,
-                // ya que tu CSS define el estilo para 'a' dentro de logout-link, no para 'button'.
-                // Si prefieres que el CSS maneje todo, podrías envolver el icono en un <a>.
+                // Estas clases de Tailwind son un fallback para hover/focus si tu CSS no los cubre
                 className="text-white hover:text-gray-200 transition-colors duration-300 focus:outline-none"
               >
                 {/* Ícono de Font Awesome. Asegúrate de que Font Awesome esté enlazado en tu index.html */}
@@ -49,16 +47,16 @@ function Header({ type = 'public', userName = 'Usuario', userRole = '', handleLo
       </header>
 
       {/* 2. Franja Intermedia (Gruesa - Blanca) */}
-      {/* Usa la clase 'header-branding' de tu CSS, que ya tiene display: flex y justify-content: space-between */}
+      {/* Usa la clase 'header-branding' de tu index.css, que ya tiene display: flex y justify-content: space-between */}
       <div className="header-branding">
         {/* Logo - Es el primer hijo directo, se alineará a la izquierda por justify-content: space-between */}
         <img src={logoVA} alt="Logo Municipalidad" className="logo" />
 
         {/* Contenedor del texto "DOM Dirección de Obras" - Es el segundo hijo directo, se alineará a la derecha */}
         <div className="text-branding">
-          {/* Texto "DOM" - Usa la clase 'dom-text' de tu CSS */}
+          {/* Texto "DOM" - Usa la clase 'dom-text' de tu index.css */}
           <span className="dom-text">DOM</span>
-          {/* Texto "Dirección de Obras" - Usa la clase 'sub-text' de tu CSS */}
+          {/* Texto "Dirección de Obras" - Usa la clase 'sub-text' de tu index.css */}
           <span className="sub-text">Dirección de Obras</span>
         </div>
       </div>

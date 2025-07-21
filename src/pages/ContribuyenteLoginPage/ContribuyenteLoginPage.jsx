@@ -19,7 +19,6 @@ function ContribuyenteLoginPage() {
     setIsLoading(true);
 
     try {
-      // Asegúrate de que esta URL sea la correcta para tu backend
       const response = await axios.post('https://backend-denuncias.onrender.com/api/contribuyentes/login', {
         email_contribuyente: email,
         password
@@ -34,8 +33,8 @@ function ContribuyenteLoginPage() {
         const displayUserName = contribuyente.nombre_contribuyente || contribuyente.email_contribuyente || 'Contribuyente';
         localStorage.setItem('userName', displayUserName);
 
-        // --- ¡LA CORRECCIÓN CLAVE ESTÁ AQUÍ! ---
-        // Guarda el ID del contribuyente bajo la clave 'userId'
+        // --- ¡LA CORRECCIÓN CLAVE ESTÁ AQUÍ Y YA ESTÁ EN TU CÓDIGO! ---
+        // Guarda el ID del contribuyente bajo la clave 'userId' para que ProtectedLayout lo lea.
         localStorage.setItem('userId', contribuyente.id_contribuyente);
 
         setMessage('Inicio de sesión exitoso como Contribuyente.');

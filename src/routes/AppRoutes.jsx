@@ -2,10 +2,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useNavigate, Link, Outlet, useOutletContext } from 'react-router-dom';
 
-// Importa tu instancia de Axios (asegúrate de que la ruta sea correcta)
+
 import axiosInstance from '../api/axiosInstance';
 
-// --- Importamos el componente Header que acabamos de crear ---
+// --- Importamos el componente Header ---
 import Header from '../components/Header/Header.jsx';
 
 // --- Importamos todos los componentes de las páginas ---
@@ -72,7 +72,7 @@ const ProtectedLayout = () => {
     setUserId(null);
     console.log('ProtectedLayout: Sesión cerrada. Redirigiendo a login.');
     // Redirige al login apropiado después de cerrar sesión
-    // Podrías tener una lógica más sofisticada aquí si hay múltiples tipos de login
+    
     navigate('/acceso-interno', { replace: true });
   };
 
