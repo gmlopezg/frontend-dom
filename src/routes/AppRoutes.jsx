@@ -3,7 +3,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useNavigate, Link, Outlet, useOutletContext } from 'react-router-dom';
 
 // Importa tu instancia de Axios (asegúrate de que la ruta sea correcta)
-import axiosInstance from '../api/axiosInstance'; // <-- Esta línea es crucial
+import axiosInstance from '../api/axiosInstance';
+
+// --- Importamos el componente Header que acabamos de crear ---
+import Header from '../components/Header/Header.jsx';
 
 // --- Importamos todos los componentes de las páginas ---
 // Componentes Públicos
@@ -23,46 +26,6 @@ import DenunciaListPage from '../pages/DenunciaListPage/DenunciaListPage.jsx';
 import DenunciaFormPage from '../pages/DenunciaFormPage/DenunciaFormPage.jsx';
 import UserListPage from '../pages/UserListPage/UserListPage.jsx';
 import UserFormPage from '../pages/UserFormPage/UserFormPage.jsx';
-
-// --- Componente GlobalHeader ---
-// Este componente reemplazará al Header importado directamente en AppRoutes
-const GlobalHeader = () => {
-  // Obtener el contexto del ProtectedLayout para acceder a la información de la sesión
-  const { userRole, userName, handleLogout } = useOutletContext();
-
-  // Función para capitalizar la primera letra y reemplazar guiones bajos
-  const formatRoleName = (role) => {
-    if (!role) return '';
-    return role.replace(/_/g, ' ').replace(/\b\w/g, s => s.toUpperCase());
-  };
-
-  return (
-    <header className="bg-gray-800 p-4 text-white shadow-lg">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Enlace al dashboard principal según el rol */}
-        <Link
-          to={userRole === 'director_de_obras' || userRole === 'administrador' || userRole === 'inspector' ? "/dashboard" : userRole === 'contribuyente' ? "/contribuyente-dashboard" : "/"}
-          className="text-2xl font-bold text-indigo-300 hover:text-indigo-200 transition duration-300"
-        >
-          Plataforma de Denuncias
-        </Link>
-        <div className="flex items-center space-x-6">
-          {userRole && (
-            <>
-              <span className="text-lg font-medium">Bienvenido, {userName || formatRoleName(userRole)}!</span>
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
-              >
-                <i className="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-    </header>
-  );
-};
 
 // --- Componente ProtectedLayout ---
 // Este componente envuelve las rutas que requieren autenticación
@@ -88,7 +51,7 @@ const ProtectedLayout = () => {
       setUserId(storedUserId); // Establecer el userId
     } else {
       // Si no está autenticado o el rol no es correcto, limpiar y redirigir
-      localStorage.clear(); // Limpia todo el localStorage relacionado con la sesión
+      localStorage.clear(); // Limpia todos los datos de sesión
       setUserRole(null);
       setUserName(null);
       setUserId(null);
@@ -122,10 +85,11 @@ const ProtectedLayout = () => {
     );
   }
 
-  // Si está autenticado, renderizar el GlobalHeader y el contenido de la ruta hija
+  // Si está autenticado, renderizar el Header y el contenido de la ruta hija
   return (
     <div className="min-h-screen flex flex-col">
-      <GlobalHeader /> {/* El GlobalHeader se renderiza aquí */}
+      {/* Aquí usamos el componente Header. Le pasamos el tipo 'private' y los datos del usuario */}
+      <Header type="private" userName={userName} userRole={userRole} handleLogout={handleLogout} />
       <div className="flex-grow">
         {/* Outlet pasa las props userRole, userName, userId, handleLogout a los componentes hijos */}
         <Outlet context={{ userRole, userName, userId, handleLogout }} />
@@ -140,18 +104,19 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* Rutas Públicas (no requieren autenticación) */}
-      <Route path="/" element={<HomePage />} />
-      <Route path="/denunciar" element={<PublicFormPage />} />
-      <Route path="/denuncias/status" element={<DenunciaStatusPage />} />
-      <Route path="/denuncias/status/:publicId" element={<DenunciaStatusPage />} />
-      <Route path="/registro-contribuyente" element={<RegistroContribuyentePage />} />
+      {/* La HomePage también usará el Header, pero con type="public" */}
+      <Route path="/" element={<><Header type="public" /><HomePage /></>} />
+      <Route path="/denunciar" element={<><Header type="public" /><PublicFormPage /></>} />
+      <Route path="/denuncias/status" element={<><Header type="public" /><DenunciaStatusPage /></>} />
+      <Route path="/denuncias/status/:publicId" element={<><Header type="public" /><DenunciaStatusPage /></>} />
+      <Route path="/registro-contribuyente" element={<><Header type="public" /><RegistroContribuyentePage /></>} />
 
       {/* Rutas de Login */}
       <Route path="/acceso-interno" element={<LoginPage />} />
       <Route path="/acceso-contribuyente" element={<ContribuyenteLoginPage />} />
 
       {/* Rutas Protegidas por el ProtectedLayout */}
-      {/* Todas las rutas anidadas aquí tendrán el GlobalHeader y la lógica de autenticación */}
+      {/* Todas las rutas anidadas aquí tendrán el Header y la lógica de autenticación */}
       <Route element={<ProtectedLayout />}>
         {/* Rutas para Director de Obras y otros usuarios DOM */}
         <Route path="/dashboard" element={<DirectorDashboardPage />} />
